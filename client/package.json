@@ -1,0 +1,22 @@
+{
+  "name": "abasjakk-client",
+  "version": "2.1.0",
+  "scripts": {
+    "build:express": "cd app && rm -rf dist && tsc",
+    "start": "cd app && bun run dist/index.js",
+    "dev:express": "cd app && tsc -w & nodemon dist/index.js"
+  },
+  "dependencies": {
+    "next": "12.2.3",
+    "nodemon": "^2.0.22",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-is": "^18"
+  },
+  "devDependencies": {
+    "bun-framework-next": "^12.2",
+    "typescript": "latest",
+    "react-refresh": "0.10.0"
+  },
+  "module": "index.js"
+}
