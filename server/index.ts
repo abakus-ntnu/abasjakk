@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import express from "express";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import router from "./routes";
 
-dotenv.config();
+// dotenv.config();
 
 mongoose.set("strictQuery", true);
 mongoose

@@ -16,15 +16,6 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {" "}
-      <AbaSeppuku />
-    </QueryClientProvider>
-  );
-}
-
-function AbaSeppuku() {
-  return (
-    <QueryClientProvider client={queryClient}>
       <main>
         <Router>
           <Route path="/" component={Home} />
