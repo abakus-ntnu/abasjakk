@@ -1,0 +1,22 @@
+.leaderboard {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.score {
+    background: rgb(165, 50, 71);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.score div {
+    width: 10%;
+    text-align: center;
+}

@@ -5,12 +5,14 @@
     "build:express": " rm -rf dist && tsc",
     "start": "tsc -w & nodemon dist/index.js"
   },
-  "dependencies": {
-    "next": "12.2.3",
-    "nodemon": "^2.0.22",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-is": "^18"
+"dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/helmet": "^4.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "bun-framework-next": "^12.2",
