@@ -13,7 +13,7 @@ type ScoreProps = {
     pos: number
 }
 
-const Leaderboard = ({scores}:LeaderboardProps) => {
+const Leaderboard = ({ scores }: LeaderboardProps) => {
 
     scores.sort((a, b) => (b.score - a.score));
 
