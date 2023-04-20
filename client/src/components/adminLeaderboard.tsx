@@ -1,12 +1,16 @@
 import "./leaderboard.css"
 
 type LeaderboardProps = {
-    scores: ScoreProps[]
+    scores: {
+        name: string,
+        score: number
+    }[]
 }
 
 type ScoreProps = {
     name: string,
-    score: number
+    score: number,
+    pos: number
 }
 
 const AdminLeaderboard = ({ scores }: LeaderboardProps) => {
@@ -15,21 +19,27 @@ const AdminLeaderboard = ({ scores }: LeaderboardProps) => {
 
     return (
         <div className={"leaderboard"}>
-            {scores.map(score => <Score key={score.name} name={score.name} score={score.score} />)}
+            {scores.map((score, index) => <Score key={score.name} name={score.name} score={score.score} pos={index + 1} />)}
 
-            <div className={"score"}>
-            <input type="text" className={"name"} placeholder={"navn"}/>
-            <input type="number" className={"scoress"} placeholder={"0"}/>
+            <div className="scoreBox">
+                <div className="position">?</div>
+                <form className="score">
+                    <input type="text" className="name" placeholder="Eks. Ola Nordmann.." />
+                    <input type="number" className="scoreNumber" placeholder="Eks: 5" />
+                </form>
             </div>
         </div>
     );
 }
 
-const Score = ({ name, score }: ScoreProps) => {
+const Score = ({ name, score, pos }: ScoreProps) => {
     return (
-        <div className={"score"}>
-            <input type="text" className={"name"} value={name}/>
-            <input type="number" className={"scoress"} value={score}/>
+        <div className="scoreBox">
+            <div className="position">{pos}</div>
+            <form className="score">
+                <input type="text" className="name" value={name} />
+                <input type="number" className="scoreNumber" value={score} />
+            </form>
         </div>
     );
 }

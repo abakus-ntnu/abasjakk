@@ -26,11 +26,11 @@ const Leaderboard = ({ scores }: LeaderboardProps) => {
 
 const Score = ({name, score, pos}:ScoreProps) => {
     return (
-        <div className={"scoreBox"}>
+        <div className="scoreBox">
             <div className="position">{pos}</div>
-            <div className={"score"}>
-                <p className={"name"}>{name}</p>
-                <div>{score}</div>
+            <div className="score">
+                <p className="name">{name}</p>
+                <div className="scoreNumber">{score}</div>
             </div>
         </div>
     );

@@ -18,7 +18,7 @@ const scores = [
 const AdminPage = () => {
   return (
     <>
-      <div>adminPage</div>
+      <h1>Admin</h1>
       <AdminLeaderboard scores={scores} />
     </>
 
