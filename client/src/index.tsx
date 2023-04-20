@@ -9,7 +9,8 @@ import {
   useQueryClient,
 } from "react-query";
 import Home from "./routes/home";
-import SomeOtherPage from "./routes/someOtherPage";
+import admin from "./routes/admin";
+import AdminPage from "./routes/admin";
 
 const queryClient = new QueryClient();
 
@@ -19,11 +20,12 @@ function App() {
       <main>
         <Router>
           <Route path="/" component={Home} />
-          <Route path="/someOtherPage" component={SomeOtherPage} />
+          <Route path="/admin" component={AdminPage} />
         </Router>
       </main>
     </QueryClientProvider>
   );
 }
+
 
 render(<App />, document.getElementById("root"));
