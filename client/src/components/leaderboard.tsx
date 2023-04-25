@@ -1,10 +1,14 @@
 import "./leaderboard.css"
 
 type LeaderboardProps = {
-    scores: {
+    data: {
         name: string,
         score: number
-    }[]
+    }[],
+    initialData: {
+      name: string,
+      score: number
+  }[]
 }
 
 type ScoreProps = {
@@ -13,13 +17,13 @@ type ScoreProps = {
     pos: number
 }
 
-const Leaderboard = ({ scores }: LeaderboardProps) => {
+const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
 
-    scores.sort((a, b) => (b.score - a.score));
+    data.sort((a, b) => (b.score - a.score));
 
     return (
         <div className={"leaderboard"}>
-            {scores.map((score, index) => <Score key={score.name} name={score.name} score={score.score} pos={index + 1} />)}
+            {data.map(score => <Score key={score.name} name={score.name} score={score.score} pos={initialData.indexOf(score) + 1} />)}
         </div>
     );
 }
