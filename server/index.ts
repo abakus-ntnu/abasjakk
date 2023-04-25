@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 import express from "express";
-// import dotenv from "dotenv";
 import router from "./routes";
-
-// dotenv.config();
 
 mongoose.set("strictQuery", true);
 mongoose
@@ -12,7 +9,7 @@ mongoose
     retryWrites: true,
     w: "majority",
   })
-  .then(() => console.log("connected"))
+  .then(() => console.log("connected to database"))
   .catch((e) => console.log(e));
 
 const app = express();
