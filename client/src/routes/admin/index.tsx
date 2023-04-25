@@ -15,7 +15,7 @@ const scores = [
   }
 ];
 
-const AdminPage = () => {
+const Admin = () => {
   return (
     <>
       <h1>Admin</h1>
@@ -26,4 +26,4 @@ const AdminPage = () => {
 };
 
 
-export default AdminPage;
+export default Admin;

@@ -1,0 +1,94 @@
+
+
+.matchesList {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    font-size: 20px;
+    /* font-weight: bold; */
+}
+
+table th {
+    padding: 20px;
+    border-bottom: 2px solid white;
+}
+
+.playerHeader, .vsHeader {
+    width: 30%;
+}
+
+tr:nth-child(odd):not(:first-child) {
+    background-color: #333;
+}
+
+td {
+    padding: 20px 10px;
+    height: 40px;
+}
+
+.vsBox {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+td img {
+    height: 60%;
+}
+
+.whiteKing {
+    filter: invert(100%);
+}
+
+
+hr {
+    width: 65%;
+    margin: 30px auto;
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .titleBox {
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .searchBox {
+        width: 90%;
+    }
+
+    .matchesList {
+        width: 95%;
+    }
+
+    .playerHeader {
+        width: 30%;
+    }
+
+    .vsHeader {
+        max-width: 5%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .vs {
+        gap: 0;
+    }
+
+    table img {
+        visibility: hidden;
+    }
+
+    td {
+        padding: 10px 5px;
+        /* height: 30px; */
+    }
+
+}

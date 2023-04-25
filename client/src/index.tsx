@@ -9,8 +9,8 @@ import {
   useQueryClient,
 } from "react-query";
 import Home from "./routes/home";
-import admin from "./routes/admin";
-import AdminPage from "./routes/admin";
+import Admin from "./routes/admin";
+import Matches from "./routes/matches";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +20,8 @@ function App() {
       <main>
         <Router>
           <Route path="/" component={Home} />
-          <Route path="/admin" component={AdminPage} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/matches" component={Matches} />
         </Router>
       </main>
     </QueryClientProvider>
