@@ -50,32 +50,6 @@
     align-items: center;
 }   
 
-input {
-    background: rgb(165, 50, 71);
-    border: none;
-    font-weight: bold;
-    font-size: 30px;
-    box-sizing: border-box;
-}
-
-input[type=number] {
-    -moz-appearance: textfield; /* Firefox remove arrows*/
-    text-align: center;
-}
-
-input::placeholder {
-    color: #f2f2f2;
-}
-
-input:focus {
-    outline: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
 
 
 

@@ -1,7 +1,10 @@
-
+.matchesBox {
+    width: 60%;
+    margin: 0 auto;
+}
 
 .matchesList {
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     border-collapse: collapse;
@@ -49,23 +52,21 @@ hr {
 }
 
 
-
-
 @media only screen and (max-width: 1000px) {
     .titleBox {
         margin: 20px auto;
     }
 
     h1 {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .searchBox {
         width: 90%;
     }
 
-    .matchesList {
-        width: 95%;
+    .matchesBox {
+        width: 90%;
     }
 
     .playerHeader {
