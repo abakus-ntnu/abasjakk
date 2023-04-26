@@ -1,14 +1,14 @@
-import "./leaderboard.css"
+import "src/styles/leaderboard.css";
 
 type LeaderboardProps = {
-    data: {
+    data: Array<{
         name: string,
         score: number
-    }[],
-    initialData: {
+    }>,
+    initialData: Array<{
       name: string,
       score: number
-  }[]
+    }>
 }
 
 type ScoreProps = {

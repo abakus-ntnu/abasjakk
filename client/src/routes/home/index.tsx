@@ -2,7 +2,7 @@ import { useState } from "preact/hooks";
 import Leaderboard from "src/components/leaderboard";
 import SearchBar from "src/components/searchBar";
 
-import "../../app.css";
+import "src/styles/app.css";
 
 const scores = [
   {
@@ -61,7 +61,6 @@ const Home = () => {
         <h1>AbaSjakk</h1>
       </div>
       <SearchBar data={scores} setSearchedData={setSearchedData} />
-      <br />
       <Leaderboard data={searchedData} initialData={scores} />
 
       <br />

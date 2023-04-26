@@ -1,6 +1,8 @@
 import { useState } from "preact/hooks";
+import MatchesTable from "src/components/matchesTable";
 import SearchBar from "src/components/searchBar";
-import "./matches.css";
+
+import "src/styles/matches.css";
 
 const pairings = [
     {
@@ -75,35 +77,12 @@ const Matches = () => {
             <div className="titleBox">
                 <h1>Kommende kamper</h1>
             </div>
-
             <SearchBar data={pairings} setSearchedData={setSearchedData} />
 
-            {/* <hr /> */}
-
-            <table className="matchesList">
-                <tr className="tableHeaders">
-                    <th className="playerHeader">Hvit</th>
-                    <th className="vsHeader" />
-                    <th className="playerHeader">Sort</th>
-                    <th className="tableColumn">Bord</th>
-                </tr>
-                {
-                    searchedData.map((pair, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{pair.white}</td>
-                                <td className="vsBox">
-                                    <img src="src/public/king.png" className="whiteKing" />  
-                                    <p>VS</p>
-                                    <img src="src/public/king.png" /> 
-                                </td>
-                                <td>{pair.black}</td>
-                                <td>{pair.table}</td>
-                            </tr>
-                        ); 
-                    })
-                }
-            </table>
+            <div className="matchesBox">
+                <MatchesTable data={searchedData} />
+            </div>
+           
 
             <br />
             <br />

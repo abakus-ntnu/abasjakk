@@ -1,0 +1,72 @@
+.adminContent {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.adminTitle {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.adminMatches {
+    flex: 1;
+}
+
+.adminLeaderboard {
+    border-collapse: collapse;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    flex: 1;
+}
+
+.inputName, .inputScore {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.inputName {
+    text-align: left;
+}
+
+.nameHeader {
+    text-align: left;
+}
+
+.imageBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.x {
+    height: 100%;
+    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%);
+    cursor: pointer;
+}
+
+.x:hover {
+    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(0px 0px 2px #f53333);
+    transform: scale(1.1);
+}
+
+.save {
+    height: 100%;
+    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%);
+    cursor: pointer;
+}
+
+.save:hover {
+    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(0 0 1px #2dd313);
+    transform: scale(1.1);
+}
