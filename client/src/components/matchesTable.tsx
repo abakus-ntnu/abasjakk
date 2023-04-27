@@ -28,9 +28,9 @@ const MatchesTable = ({ data, isAdmin }:Props) => {
                     <tr key={index}>
                         <td>{pair.white}</td>
                         <td className="vsBox">
-                            <img src="src/public/king.png" className="whiteKing" />  
+                            <img src="src/public/king.svg" className="whiteKing" />  
                             <p>VS</p>
-                            <img src="src/public/king.png" /> 
+                            <img src="src/public/king.svg" /> 
                         </td>
                         <td>{pair.black}</td>
                         <td>{pair.table}</td>

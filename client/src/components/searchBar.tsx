@@ -28,7 +28,7 @@ const SearchBar = ({ data, additionalData, setSearchedData, setAdditionalSearche
     }
     return (
         <div className="searchBox">
-            <img src="src/public/search.png" />
+            <img src="src/public/search.svg" />
             <input type="text" className="search" onInput={onInput} />
         </div>
     );

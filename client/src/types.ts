@@ -6,6 +6,18 @@ export type User = {
   score?: number
 }
 
+export type Match = {
+  _id?: string,
+  white: string,
+  black: string,
+  table: number
+}
+
+export type Round = {
+  order: number,
+  matches: string[]
+}
+
 export interface LeaderboardProps {
   data: User[],
   initialData: User[],
