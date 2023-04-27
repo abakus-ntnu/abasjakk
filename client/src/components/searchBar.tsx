@@ -34,19 +34,4 @@ const SearchBar = ({ data, additionalData, setSearchedData, setAdditionalSearche
     );
 }
 
-
-
-/*
-Template for using searchBar
-    import { useState } from 'preact/hooks';
-
-    const [searchedData, setSearchedData = useState(initialData)];
-
-    return (
-        <SearchBar data={initialData} setSearchedData={setSearchedData} />
-
-        <ComponentDisplayingTheData data={searchedData} />
-    );
-*/
-
 export default SearchBar;

@@ -1,58 +1,26 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+import { GetUsers } from "src/api/user";
 import Leaderboard from "src/components/leaderboard";
 import SearchBar from "src/components/searchBar";
 
 import "src/styles/app.css";
-
-const scores = [
-  {
-    name: "Jenny",
-    score: 90
-  },
-  {
-    name: "Isak",
-    score: 8
-  },
-  {
-    name: "Falk",
-    score: 5
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  },
-  {
-    name: "Abakule1",
-    score: 0
-  }
-];
+import StatusMessage from "src/components/statusMessage";
 
 const Home = () => {
-  const [searchedData, setSearchedData] = useState(scores);
+  const [initialData, setInitialData] = useState([]);
+  const [searchedData, setSearchedData] = useState([]);
+
+  const getUsers = GetUsers();
+
+  useEffect(() => {
+    if (getUsers.isFetched) {
+      setInitialData(getUsers.data);
+    }
+  }, [getUsers]);
+  
+  useEffect(() => {
+    setSearchedData(initialData);
+  }, [initialData]);
 
   return (
     <>
@@ -60,18 +28,11 @@ const Home = () => {
         <img src="src/public/AbaSjakk_logo.webp" className="logo" />
         <h1>AbaSjakk</h1>
       </div>
-      <SearchBar data={scores} setSearchedData={setSearchedData} />
-      <Leaderboard data={searchedData} initialData={scores} />
-
-      <br />
-      <br />
-      <br />
-      
-      {/* <div className="footer">
-        <a href="https://github.com/Abakus-ntnu">
-          <img src="src/public/github.png" className="github" />
-        </a>
-      </div> */}
+      <SearchBar data={initialData} setSearchedData={setSearchedData} />
+      {getUsers.isLoading || getUsers.isError ? 
+      <StatusMessage query={getUsers} /> :
+      <Leaderboard data={searchedData} initialData={initialData} />
+      }
     </>
   );
 };
