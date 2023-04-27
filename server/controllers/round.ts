@@ -2,19 +2,16 @@ import User from "../models/user";
 import Match from "../models/match";
 import Round from "../models/round";
 import { RequestHandler } from "express";
-import { Schema, ObjectId } from "mongoose";
-import { UserType, MatchStatus, RoundType } from "../types"
+import { Types } from "mongoose";
+import { IUser, IRound, MatchStatus, Pair, UserId, ChessPiece } from "../types"
 
 export const getRounds: RequestHandler = async (_req, res) => {
   Round.find()
-    .then((rounds) => (rounds ? res.status(200).json(rounds) : res.status(404).end()))
-    .catch((e) => res.status(500).send(e));
+    .then(rounds => res.status(200).json(rounds))
+    .catch(e => res.status(404).send(e));
 };
 
-export const getLatestRound: RequestHandler = async (_req, res) => {
-}
-
-export const createRound: RequestHandler = async (req, res) => {
+export const createRound: RequestHandler = async (_req, res) => {
   const sortedUsers = await User.find().sort("-score");
   const previousRound = await Round.findOne().sort("-order");
 
@@ -22,21 +19,16 @@ export const createRound: RequestHandler = async (req, res) => {
     const pairs = generateRandomPairs(sortedUsers);
     const round = new Round({order: 1, matches: createMatchesFromPairs(pairs)});
     round.save()
-      .then(() => res.status(201).end())
-      .catch((e) => res.status(500).send(e));
+      .then(_ => res.status(201).end())
+      .catch(e => res.status(500).send(e));
     return;
   }
 
   const pairs = await pairingAlgorithm(sortedUsers, previousRound);
   const round = new Round({order: previousRound.order.valueOf() + 1, matches: createMatchesFromPairs(pairs)});
   round.save()
-    .then(() => res.status(201).end())
-    .catch((e) => res.status(500).send(e));
-}
-
-type Pair = {
-  white: {type: ObjectId, ref: "User"},
-  black: {type: ObjectId, ref: "User"},
+    .then(_ => res.status(201).end())
+    .catch(e => res.status(500).send(e));
 }
 
 const generateRandomPairs = (users: any[]) => { // Very random yes
@@ -51,35 +43,31 @@ const generateRandomPairs = (users: any[]) => { // Very random yes
   return randomPairs;
 }
 
-const shuffle = (array: number[]) => { // Shameless kok
-  let currentIndex = array.length,  randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-
-  return array;
-}
-
 const generateRandomTables = (length: number) => {
   const MAX_TABLES = 20; // TODO: Fetch MAX_TABLES from database
   const numbers = [];
   for (let i = 0; i < MAX_TABLES; i++) {
   numbers.push(i + 1);
   }
+
+  const shuffle = (array: number[]) => { // Shameless kok
+    let currentIndex = array.length,  randomIndex;
+
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
   return shuffle(numbers).slice(0, length);
 }
 
 const createMatchesFromPairs = (pairs: Pair[]) => {
-  const matches: ObjectId[] = [];
+  const matches: { type: Types.ObjectId, ref: "Match" }[] = [];
 
   const tables = generateRandomTables(pairs.length);
   for (let i = 0; i < pairs.length; i++) {
@@ -91,11 +79,11 @@ const createMatchesFromPairs = (pairs: Pair[]) => {
   return matches;
 }
 
-const pairingAlgorithm = async (sortedUsers: any[], previousRound: RoundType) => {
+const pairingAlgorithm = async (sortedUsers: IUser[], previousRound: IRound) => { // TODO: Rewrite this mess
   const newPairings: Pair[] = [];
   const previousPairings: Pair[] = [];
-  const playerToColor: Map<string, string> = new Map(); // Should be enum
-  const playerToOpponent: Map<string, string> = new Map();
+  const playerToPiece: Map<UserId, ChessPiece> = new Map();
+  const playerToOpponent: Map<UserId, UserId> = new Map();
 
   // This is definitely NOT the most efficient way of doing it, but i don't give a single shit
   for (let i = 0; i < previousRound.matches.length; i++) {
@@ -103,27 +91,27 @@ const pairingAlgorithm = async (sortedUsers: any[], previousRound: RoundType) =>
     if (!match) continue;
     previousPairings.push({white: match.white, black: match.black });
 
-    playerToColor.set(match.white.toString(), "WHITE");
-    playerToColor.set(match.black.toString(), "BLACK");
-    playerToOpponent.set(match.white.toString(), match.black.toString());
-    playerToOpponent.set(match.black.toString(), match.white.toString());
+    playerToPiece.set(match.white, ChessPiece.WHITE);
+    playerToPiece.set(match.black, ChessPiece.BLACK);
+    playerToOpponent.set(match.white, match.black);
+    playerToOpponent.set(match.black, match.white);
   }
 
   while (sortedUsers.length > 1) {
     const player = sortedUsers.shift();
     if (player === undefined) break;
-    const newOpponentId = (playerToOpponent.get(player._id.toString()) == sortedUsers[0]._id.toString()) ? 1 : 0;
+    const newOpponentId = (playerToOpponent.get(player._id) == sortedUsers[0]._id) ? 1 : 0;
     const newOpponent = sortedUsers[newOpponentId];
     // Assign colors
     let p: Pair = { white: newOpponent._id, black: player._id };
-    if (playerToColor.get(player._id.toString()) == "BLACK" && playerToColor.get(newOpponent._id.toString()) == "WHITE") p = { white : player._id, black: newOpponent._id }
+    if (playerToPiece.get(player._id) == ChessPiece.BLACK && playerToPiece.get(newOpponent._id) == ChessPiece.WHITE) p = { white : player._id, black: newOpponent._id }
     newPairings.push(p);
     // Remove shit
     sortedUsers.splice(newOpponentId, 1);
   }
 
   if (sortedUsers.length == 1) {
-    newPairings.push({ white: sortedUsers[0], black: sortedUsers[0] });
+    newPairings.push({ white: sortedUsers[0]._id, black: sortedUsers[0]._id });
   }
 
   return newPairings;
