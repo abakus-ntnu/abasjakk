@@ -7,6 +7,18 @@ import { IUser, IRound, MatchStatus, Pair, UserId, ChessPiece } from "../types"
 
 export const getRounds: RequestHandler = async (_req, res) => {
   Round.find()
+    .populate({
+      path: "matches",
+      populate : {
+        path: "white",
+      },
+    })
+    .populate({
+      path: "matches",
+      populate : {
+        path: "black",
+      },
+    })
     .then(rounds => res.status(200).json(rounds))
     .catch(e => res.status(404).send(e));
 };
