@@ -28,6 +28,24 @@ body {
   /* text-align: center; */
 }
 
+.loading, .error {
+  margin: 0 auto;
+  width: fit-content;
+  font-size: 30px;
+  background-color: #333;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.loading {
+  color: orange;
+}
+
+.error {
+  color: red;
+}
+
 nav {
   width: 35%;
   margin: 20px auto;
