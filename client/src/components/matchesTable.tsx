@@ -14,6 +14,7 @@ const MatchesTable = ({ data, isAdmin }:Props) => {
     }
     return (
         <table className="matchesList">
+        <caption>Kamper</caption>
         <tr className="tableHeaders">
             <th className="playerHeader">Hvit</th>
             <th className="vsHeader" />
