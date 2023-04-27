@@ -17,6 +17,8 @@ export const createMatch: RequestHandler = async (req, res) => {
 
 export const getMatch: RequestHandler = async (req, res) => {
   Match.findById(req.params.id)
+    .populate("white")
+    .populate("black")
     .then(match => res.status(200).json(match))
     .catch(e => res.status(404).send(e));
 }
