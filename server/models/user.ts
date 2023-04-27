@@ -1,8 +1,9 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
+import { IUser } from '../types';
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  score: Number,
+const userSchema = new Schema<IUser>({
+  name: { type: String, required: true },
+  score: { type: Number, required: true },
 });
 
-export default mongoose.model("User", userSchema);
+export default model<IUser>("User", userSchema);

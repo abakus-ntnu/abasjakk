@@ -1,7 +1,7 @@
-import { model, Schema } from 'mongoose';
-import { MatchType } from '../types';
+import { Schema, model } from 'mongoose';
+import { IMatch } from '../types';
 
-const matchSchema = new Schema<MatchType>({
+const matchSchema = new Schema<IMatch>({
   white: { type: Schema.Types.ObjectId, ref: "User" },
   black: { type: Schema.Types.ObjectId, ref: "User" },
   table: Number,
@@ -11,4 +11,4 @@ const matchSchema = new Schema<MatchType>({
   }
 });
 
-export default model("Match", matchSchema);
+export default model<IMatch>("Match", matchSchema);

@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
-import { RoundType } from '../types';
+import { Schema, model } from 'mongoose';
+import { IRound } from '../types';
 
-const roundSchema = new mongoose.Schema<RoundType>({
+const roundSchema = new Schema<IRound>({
   order: Number,
-  matches: [{ type: mongoose.Schema.Types.ObjectId }]
+  matches: [{ type: Schema.Types.ObjectId, ref: "Match" }]
 });
 
-export default mongoose.model("Round", roundSchema);
+export default model<IRound>("Round", roundSchema);
