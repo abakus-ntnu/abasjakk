@@ -90,7 +90,7 @@ const Matches = () => {
             
             {/* <div className="footer">
                 <a href="https://github.com/Abakus-ntnu">
-                <img src="src/public/github.png" className="github" />
+                <img src="src/public/github.svg" className="github" />
                 </a>
             </div> */}
     </>

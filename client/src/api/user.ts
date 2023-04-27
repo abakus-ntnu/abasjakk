@@ -27,7 +27,7 @@ export const UpdateUser = () => useMutation({
     retry: 2,
     mutationKey: "updateUser",
     mutationFn: async (user:User):Promise<void> => await ApiClient.put(`/user/${user._id}`, user)
-    .then(res => console.log(res.status, "user updated"))
+        .then(res => console.log(res.status, "user updated"))
         .catch(err => err)
     });
 
