@@ -6,34 +6,6 @@ import SearchBar from "src/components/searchBar";
 import StatusMessage from "src/components/statusMessage";
 
 import "src/styles/admin.css";
-import { QueryProps, QueryPropsUsers } from "src/types";
-
-const scores = [
-  {
-    name: "Jenny",
-    score: 90
-  },
-  {
-    name: "Isak",
-    score: 8
-  },
-  {
-    name: "Falk",
-    score: 5
-  },
-  {
-    name: "Ivar",
-    score: 7
-  },
-  {
-    name: "abakule1",
-    score: 0
-  },
-  {
-    name: "abakule2",
-    score: 0
-  }
-];
 
 const pairings = [
   {
@@ -54,10 +26,6 @@ const pairings = [
 ]
 
 const Admin = () => {
-  const users = {
-    scores,
-    pairings
-  }
   const [initialScores, setInitialScores] = useState([]);
   const [searchedScores, setSearchedScores] = useState([]);
 
@@ -91,11 +59,20 @@ const Admin = () => {
   return (
     <>
       <h1 className="adminTitle">Admin</h1>
-      <SearchBar data={initialScores} additionalData={initialPairings} setSearchedData={setSearchedScores} setAdditionalSearchedData={setSearchedPairings} />
-      <input placeholder="CREATE USER" onKeyDown={onSubmit} />
+      <div className="adminControls">
+        <SearchBar data={initialScores} additionalData={initialPairings} setSearchedData={setSearchedScores} setAdditionalSearchedData={setSearchedPairings} />
+        <div className="createUserBox">
+            <input placeholder="Legg til ny bruker" onKeyDown={onSubmit} />
+            <img src="src/public/new-user.svg" className="createUserIcon" />
+        </div>
+        <div className="numberOfTablesBox">
+          <h3>Antall bord:</h3>
+          <input type="number" value={10} min={0} placeholder="0" />
+        </div>
+        <input type="button" value="Generer ny runde" />
+      </div>
       <div className="adminContent">
         <div className="adminLeaderboard">
-          <h2>Leaderboard</h2>
           {getUsers.isLoading || getUsers.isError ? 
             <StatusMessage query={getUsers} /> : 
             <AdminLeaderboard data={searchedScores} initialData={initialScores} getUsersQuery={getUsers} />
@@ -103,10 +80,7 @@ const Admin = () => {
         </div>
         <div className="verticalLine" />
         <div className="adminMatches">
-          <div>
-          <h2>Kamper</h2>
           <MatchesTable data={searchedPairings} isAdmin={true} />
-          </div>
           <div>
             <h2>Kamp historikk</h2>
           </div>

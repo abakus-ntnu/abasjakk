@@ -11,6 +11,84 @@
     font-size: 50px;
 }
 
+.adminControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto 40px;
+    gap: 30px;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.adminControls * {
+    margin: auto;
+}
+
+.searchBox, .createUserBox, .numberOfTablesBox, input[type=button] {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 10px;
+    height: 40px;
+    border: 3px solid #0496FF;
+    flex-grow: 1; 
+}
+
+.searchBox, .createUserBox {
+    width: 25%;
+}
+
+.createUserBox input {
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.createUserIcon {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(87%) saturate(2503%) hue-rotate(186deg) brightness(105%) contrast(104%);
+    transition: .2s;
+    cursor: pointer;
+    transform: scale(1.4);
+    margin: 0 10px;
+}
+
+.createUserIcon:hover {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(87%) saturate(2503%) hue-rotate(186deg) brightness(105%) contrast(104%)drop-shadow(0px 0px 2px #222);
+    transform: scale(1.6);
+}
+
+.numberOfTablesBox {
+    display: flex;
+    justify-content: center;
+}
+
+.numberOfTablesBox input {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    width: 40px;
+}
+
+.adminControls input[type=button] {
+    height: 66px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.adminControls input[type=button]:hover {
+    background-color: #0496FF;
+}
+
+
+
+
+
 h2 {
     font-size: 30px;
 }
@@ -25,6 +103,10 @@ h2 {
     text-align: center;
     width: 100%;
     flex: 1;
+}
+
+.adminLeaderboard caption, .adminMatches caption {
+    font-size: 30px;
 }
 
 .inputName, .inputScore {
@@ -53,6 +135,7 @@ h2 {
     height: 100%;
     filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%);
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .x:hover {
@@ -64,6 +147,7 @@ h2 {
     height: 100%;
     filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%);
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .save:hover {

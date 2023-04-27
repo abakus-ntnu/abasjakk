@@ -35,6 +35,7 @@ const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps
 
     return (
         <table className="adminLeaderboard">
+            <caption>Leaderboard</caption>
             <tr>
                 <th>Posisjon</th>
                 <th className="nameHeader">Navn</th>
