@@ -13,6 +13,22 @@ router.use((req, res, next) => {
     }
     next();
 });
+
+router.use((req, res, next) => {
+  if (req.method == "GET") {
+    next();
+    return;
+  }
+
+  if (req.headers.password == process.env.PASSWORD) {
+    next();
+  }else {
+    res.status(401).send("ERROR: Incorrect password");
+  }
+});
+
+router.post('/checkPassword', (_req, res) => res.status(200).end());
+
 router.use('/user', userRoutes);
 router.use('/match', matchRoutes);
 router.use('/round', roundRoutes);
