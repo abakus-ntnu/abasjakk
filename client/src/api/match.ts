@@ -24,7 +24,7 @@ export const CreateMatch = () => useMutation({
 export const UpdateResult = () => useMutation({
     retry: 2,
     mutationKey: "updateResult",
-    mutationFn: async (match:Match):Promise<void> => await ApiClient.put(`/match/${match._id}`, match)
+    mutationFn: async (data:{match:Match, result:object}):Promise<void> => await ApiClient.put(`/match/${data.match._id}`, data.result)
         .then(res => console.log(res.status, "match updated"))
         .catch(err => err)
 });

@@ -11,7 +11,15 @@ export type Match = {
   _id?: string,
   white: User,
   black: User,
-  table: number
+  table: number,
+  result?: result
+}
+
+export enum result {
+  IN_PROGRESS = "IN_PROGESS",
+  WHITE_VICTORY = "WHITE_VICTORY",
+  BLACK_VICTORY = "BLACK_VICTORY",
+  DRAW = "DRAW"
 }
 
 export type Round = {
@@ -41,8 +49,9 @@ export interface LeaderboardProps {
 
 export interface MatchesTableProps {
   data: Round,
+  roundNr: number | string,
   isAdmin?: boolean,
-  roundNr: number | string
+  getUsers?: any
 }
 
 export interface QueryProps {

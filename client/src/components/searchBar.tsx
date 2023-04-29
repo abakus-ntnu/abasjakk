@@ -14,7 +14,7 @@ const SearchBar = ({ users, setUsers, rounds, setRounds, type }:SearchBarProps) 
     }
 
     return (
-        <div className="searchBox">
+        <div className="searchBox gradient-border">
             <img src="src/public/search.svg" />
             <input type="text" className="search" onInput={onInput} />
         </div>

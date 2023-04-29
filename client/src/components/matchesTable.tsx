@@ -1,10 +1,20 @@
-import { MatchesTableProps } from "src/types"
+import { Match, MatchesTableProps, result } from "src/types"
+import { UpdateResult } from "src/api/match";
 import StatusMessage from "./statusMessage";
 
-const MatchesTable = ({ data, isAdmin = false, roundNr }:MatchesTableProps) => {
-    const setResult = (event) => {
-        console.log(event.target.value, "vant");
+const MatchesTable = ({ data, roundNr, isAdmin = false, getUsers }:MatchesTableProps) => {
+
+    const updateResult = UpdateResult();
+
+    const setResult = (event, match:Match) => {
+        updateResult.mutate({
+            match, 
+            result: {result: event.target.value}
+        }, { 
+            onSuccess: () => {getUsers.refetch()}
+        });
     }
+
     return (
         <>
             <table className="matchesList">
@@ -29,11 +39,11 @@ const MatchesTable = ({ data, isAdmin = false, roundNr }:MatchesTableProps) => {
                         <td>{match.table || "?"}</td>
                         {isAdmin && 
                             <td>
-                                <select onChange={setResult}>
-                                    <option disabled selected value=""> -- Resultat --</option>
-                                    <option value={match.white.name}>Hvit vant</option>
-                                    <option value={match.black.name}>Sort vant</option>
-                                    <option value="DRAW">Uavgjort</option>
+                                <select onChange={(event) => setResult(event, match)} autoComplete="off">
+                                    <option selected={match.result === result.IN_PROGRESS} value="IN_PROGRESS">-- PÅGÅR --</option>
+                                    <option selected={match.result === result.WHITE_VICTORY} value="WHITE_VICTORY">HVIT VANT</option>
+                                    <option selected={match.result === result.BLACK_VICTORY} value="BLACK_VICTORY">SORT VANT</option>
+                                    <option selected={match.result === result.DRAW} value="DRAW">UAVGJORT</option>
                                 </select>  
                             </td>
                         }
