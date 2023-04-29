@@ -7,6 +7,7 @@ import Admin from "./routes/admin";
 import Matches from "./routes/matches";
 
 import "./styles/app.css";
+import Laser from "./components/laser";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/matches" component={Matches} />
         </Router>
       </main>
+      <Laser/>
     </QueryClientProvider>
   );
 }

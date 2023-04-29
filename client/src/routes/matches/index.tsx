@@ -48,7 +48,6 @@ const Matches = () => {
                 <img src="src/public/github.svg" className="github" />
                 </a>
             </div> */}
-            <Laser />
             <div className="fade" />
         </>
     );
