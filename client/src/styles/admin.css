@@ -4,11 +4,11 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    gap: 40px;
+    gap: 4rem;
 }
 
 .adminTitle {
-    font-size: 50px;
+    font-size: 5rem;
 }
 
 .adminControls {
@@ -16,10 +16,10 @@
     justify-content: center;
     align-items: center;
     width: 90%;
-    margin: 0 auto 40px;
-    gap: 30px;
+    margin: 0 auto 4rem;
+    gap: 3rem;
     flex-wrap: wrap;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -27,31 +27,32 @@
     margin: auto;
 }
 
-.searchBox, .createUserBox, .numberOfTablesBox, input[type=button] {
+.adminControls .searchBox, .createUserBox, .numberOfTablesBox, input[type=button] {
     display: flex;
     align-items: center;
     background-color: #333;
     padding: 10px;
     border-radius: 10px;
-    height: 40px;
-    border: 3px solid #0496FF;
+    height: 2rem;
+    border: 1.5px solid #0496FF;
     flex-grow: 1; 
+    transition: .3s;
 }
 
-.searchBox, .createUserBox {
+.adminControls .searchBox, .createUserBox {
     width: 25%;
 }
 
 .createUserBox input {
     width: 100%;
-    font-size: 30px;
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: left;
 }
 
 .createUserIcon {
     filter: brightness(0) saturate(100%) invert(39%) sepia(87%) saturate(2503%) hue-rotate(186deg) brightness(105%) contrast(104%);
-    transition: .2s;
+    transition: .3s;
     cursor: pointer;
     transform: scale(1.4);
     margin: 0 10px;
@@ -64,20 +65,28 @@
 
 .numberOfTablesBox {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
+    align-items: center;
+}
+
+.numberOfTablesBox h3 {
+    height: 2rem;
+    font-size: 1.5rem;
 }
 
 .numberOfTablesBox input {
     text-align: center;
-    font-size: 30px;
+    height: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    width: 40px;
+    width: 3rem;
+    margin-bottom: 15px;
 }
 
 .adminControls input[type=button] {
-    height: 66px;
-    font-size: 30px;
-    font-weight: bold;
+    height: 3.438rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
@@ -99,14 +108,15 @@ h2 {
 
 .adminLeaderboard {
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 1.5rem;
     text-align: center;
+    align-items: center;
     width: 100%;
     flex: 1;
 }
 
 .adminLeaderboard caption, .adminMatches caption {
-    font-size: 30px;
+    font-size: 1.5rem;
 }
 
 .inputName, .inputScore {
@@ -128,7 +138,7 @@ h2 {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem;
 }
 
 .x {
@@ -139,7 +149,7 @@ h2 {
 }
 
 .x:hover {
-    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(0px 0px 2px #f53333);
+    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(0px 0px 2px #222);
     transform: scale(1.1);
 }
 
@@ -151,6 +161,8 @@ h2 {
 }
 
 .save:hover {
-    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(0 0 1px #2dd313);
+    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(0 0 1px #222);
     transform: scale(1.1);
 }
+
+

@@ -1,13 +1,7 @@
 import { render } from "preact";
-import { Route, Router, Link, getCurrentUrl } from "preact-router";
 import { useRef } from "preact/hooks";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQueries,
-  useQuery,
-  useQueryClient,
-} from "react-query";
+import { Route, Router, Link, getCurrentUrl } from "preact-router";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./routes/home";
 import Admin from "./routes/admin";
 import Matches from "./routes/matches";

@@ -1,4 +1,5 @@
 import "src/styles/leaderboard.css";
+import StatusMessage from "./statusMessage";
 
 type LeaderboardProps = {
     data: Array<{
@@ -24,6 +25,7 @@ const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
     return (
         <div className={"leaderboard"}>
             {data.map(score => <Score key={score.name} name={score.name} score={score.score} pos={initialData.indexOf(score) + 1} />)}
+            {data.length === 0 && <StatusMessage status="no-result" />}
         </div>
     );
 }

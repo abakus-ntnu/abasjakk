@@ -1,22 +1,23 @@
-import { UseQueryResult } from "react-query";
-import { User } from "src/types";
+import { StatusMessageProps } from "src/types";
 
-type Props = {
-    query: UseQueryResult<User[], unknown>
-    // status: string,
-    // error: Error | unknown
-}
-
-const StatusMessage = ({ query }:Props) => {
-    if (query.status === "loading") return (
-        <p className="loading">Loading...</p>
-    );
-    if (query.status === "error" && query.error instanceof Error) return (
-        <p className="error"><b>{query.error.message}</b><br />An error has occured :/</p>
-    );
+const StatusMessage = ({ query, status }:StatusMessageProps) => {
+    if (query) {
+        if (query.status === "loading") return (
+            <p className="loading">Loading...</p>
+        );
+        if (query.status === "error" && query.error instanceof Error) return (
+            <p className="error"><b>{query.error.message}</b><br />An error has occured :/</p>
+        );
+        if (query.status === "success") return (
+            <p className="success">Success..?</p>
+        )
+    }
+    if (status === "no-results") return (
+        <p className="info">Ingen Treff...</p>
+    )
     return (
         <p>If you read this, idk what happened...</p>
-    );
+    )
 }
 
 export default StatusMessage;

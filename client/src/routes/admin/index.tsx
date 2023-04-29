@@ -1,50 +1,40 @@
 import { useEffect, useState } from "preact/hooks";
+import { GetRounds } from "src/api/round";
 import { CreateUser, GetUsers } from "src/api/user";
 import AdminLeaderboard from "src/components/adminLeaderboard";
+import Laser from "src/components/laser";
 import MatchesTable from "src/components/matchesTable";
 import SearchBar from "src/components/searchBar";
 import StatusMessage from "src/components/statusMessage";
 
 import "src/styles/admin.css";
 
-const pairings = [
-  {
-    white: "isak",
-    black: "falk",
-    table: 1
-  },
-  {
-    white: "jenny",
-    black: "ivar",
-    table: 2
-  },
-  {
-    white: "abakule1",
-    black: "abakule2",
-    table: 3
-  }
-]
-
 const Admin = () => {
-  const [initialScores, setInitialScores] = useState([]);
-  const [searchedScores, setSearchedScores] = useState([]);
+  const [createUserInputValue, setCreateUserInputValue] = useState("");
 
-  const [initialPairings, setInitialPairings] = useState(pairings);
-  const [searchedPairings, setSearchedPairings] = useState(pairings);
+  const [initialUsers, setInitialUsers] = useState([]);
+  const [searchedUsers, setSearchedUsers] = useState([]);
 
+  const [initialRounds, setInitialRounds] = useState([]);
+  const [searchedRounds, setSearchedRounds] = useState([]);
+  
   const getUsers = GetUsers();
   const createUser = CreateUser();
-
+  const getRounds = GetRounds();
 
   useEffect(() => {
-    if (getUsers.isFetched) {
-      setInitialScores(getUsers.data);
-    }
-  }, [getUsers]);
+    if (getUsers.isFetched) setInitialUsers(getUsers.data);
+    if (getRounds.isFetched) setInitialRounds(getRounds.data);
+  }, [getUsers, getRounds]);
   
   useEffect(() => {
-    setSearchedScores(initialScores);
-  }, [initialScores]);
+    setSearchedUsers(initialUsers);
+  }, [initialUsers])
+  
+  useEffect(() => {
+    setSearchedRounds(initialRounds);
+  }, [initialRounds]);
+
 
   const onSubmit = (e) => {
     if (e.key === "Enter") {
@@ -55,12 +45,12 @@ const Admin = () => {
       });
     }
   }
-
+  
   return (
     <>
       <h1 className="adminTitle">Admin</h1>
       <div className="adminControls">
-        <SearchBar data={initialScores} additionalData={initialPairings} setSearchedData={setSearchedScores} setAdditionalSearchedData={setSearchedPairings} />
+        <SearchBar type="BOTH" users={initialUsers} setUsers={setSearchedUsers} rounds={initialRounds} setRounds={setSearchedRounds} />
         <div className="createUserBox">
             <input placeholder="Legg til ny bruker" onKeyDown={onSubmit} />
             <img src="src/public/new-user.svg" className="createUserIcon" />
@@ -73,21 +63,28 @@ const Admin = () => {
       </div>
       <div className="adminContent">
         <div className="adminLeaderboard">
-          {getUsers.isLoading || getUsers.isError ? 
+          {getUsers.isLoading || getUsers.isError || searchedUsers.length == 0 ? 
             <StatusMessage query={getUsers} /> : 
-            <AdminLeaderboard data={searchedScores} initialData={initialScores} getUsersQuery={getUsers} />
+            <AdminLeaderboard data={searchedUsers} initialData={initialUsers} getUsersQuery={getUsers} />
           }
         </div>
         <div className="verticalLine" />
         <div className="adminMatches">
-          <MatchesTable data={searchedPairings} isAdmin={true} />
+          {getRounds.isLoading || getRounds.isError || searchedRounds.length <= 0 ? 
+            <StatusMessage query={getRounds} /> : (
+            <MatchesTable data={searchedRounds[searchedRounds.length - 1]} isAdmin={true} roundNr="NÅ" />)
+          }
           <div>
-            <h2>Kamp historikk</h2>
+            {getRounds.isLoading || getRounds.isError || searchedRounds.length <= 0 ?
+              <StatusMessage query={getRounds} /> : 
+              initialRounds.slice(0, -1).reverse().map((_round, index) => (
+                <MatchesTable data={searchedRounds[index]} isAdmin={true} roundNr={index + 1} key={index} />
+              ))}
           </div>
         </div>
       </div>
-
-
+      <Laser />
+      <div className="fade" />
     </>
 
   );
