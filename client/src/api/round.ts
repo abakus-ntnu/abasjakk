@@ -16,7 +16,7 @@ export const GetRounds = () => useQuery({
 export const CreateRound = () => useMutation({
     retry: 2,
     mutationKey: "createRound",
-    mutationFn: async ():Promise<void> => await ApiClient.post("/round/")
+    mutationFn: async (_:object):Promise<void> => await ApiClient.post("/round/")
         .then(res => console.log(res.status, "round created"))
         .catch(err => err)
 });

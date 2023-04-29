@@ -34,7 +34,7 @@ const Matches = () => {
             <div className="matchesBox">
                 {getRounds.isLoading || getRounds.isError || searchedData.length === 0 ? 
                 <StatusMessage query={getRounds} /> :
-                <MatchesTable data={searchedData[0]} roundNr={initialData[initialData.length - 1].order} />
+                <MatchesTable data={searchedData[searchedData.length - 1]} roundNr={initialData[initialData.length - 1].order} />
                 }
             </div>
            

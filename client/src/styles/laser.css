@@ -1,3 +1,4 @@
+@import "./colors.css";
 
 .laser-beam {
     z-index: -1;
@@ -7,9 +8,9 @@
     width: 3px;
     height: 500%;
     background: rgba(99,195,231,0.6);
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(99,195,231,1);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(99,195,231,1);
-    box-shadow: 0px 0px 15px 0px rgba(99,195,231,1);
+    -webkit-box-shadow: 0px 0px 15px 0px var(--neon-blue);
+    -moz-box-shadow: 0px 0px 15px 0px var(--neon-blue);
+    box-shadow: 0px 0px 15px 0px var(--neon-blue);
     transform-origin: 0 100%;
     -webkit-transform-origin: 0 100%;
     animation: laser 7s infinite;
@@ -21,27 +22,27 @@
     -webkit-animation: laser 8s infinite;
     animation: laser 8s infinite;
     background: rgba(236,19,65,0.6);
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(236,19,65,1);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(236,19,65,1);
-    box-shadow: 0px 0px 15px 0px rgba(236,19,65,1);
+    -webkit-box-shadow: 0px 0px 15px 0px var(--neon-red);
+    -moz-box-shadow: 0px 0px 15px 0px var(--neon-red);
+    box-shadow: 0px 0px 15px 0px var(--neon-red);
   }
   
   .green {
     -webkit-animation: laser 9s infinite;
     animation: laser 9s infinite;
     background: rgba(86, 212, 69, 0.6);
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(86, 212, 69,1);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(86, 212, 69,1);
-    box-shadow: 0px 0px 15px 0px rgba(86, 212, 69,1);
+    -webkit-box-shadow: 0px 0px 15px 0px var(--neon-green);
+    -moz-box-shadow: 0px 0px 15px 0px var(--neon-green);
+    box-shadow: 0px 0px 15px 0px var(--neon-green);
   }
   
   .purple {
     -webkit-animation: laser 6s infinite;
     animation: laser 6s infinite;
     background: rgba(204, 102, 255, 0.6);
-    -webkit-box-shadow: 0px 0px 15px 0px rgba(204, 102, 255,1);
-    -moz-box-shadow: 0px 0px 15px 0px rgba(204, 102, 255,1);
-    box-shadow: 0px 0px 15px 0px rgba(204, 102, 255,1);
+    -webkit-box-shadow: 0px 0px 15px 0px var(--neon-purple);
+    -moz-box-shadow: 0px 0px 15px 0px var(--neon-purple);
+    box-shadow: 0px 0px 15px 0px var(--neon-purple);
    
   }
   
@@ -58,8 +59,8 @@
   }
   
   .unsynced {
-    animation: laserAsync 7s infinite;
-    -webkit-animation: laserAsync 7s infinite; 
+    animation: laserUnsynced 7s infinite;
+    -webkit-animation: laserUnsynced 7s infinite; 
   }
   
   @-webkit-keyframes laser {
@@ -92,7 +93,7 @@
     }
   }
   
-  @keyframes laserAsync {
+  @keyframes laserUnsynced {
     0% {
     -webkit-transform: rotateZ(75deg);
     transform: rotateZ(75deg);
@@ -107,7 +108,7 @@
     }
   }
   
-  @-webkit-keyframes laserAsync {
+  @-webkit-keyframes laserUnsynced {
     0% {
     -webkit-transform: rotateZ(75deg);
     transform: rotateZ(75deg);

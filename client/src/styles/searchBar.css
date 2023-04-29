@@ -1,9 +1,11 @@
+@import "src/styles/app.css";
+
 .searchBox {
     height: 40px;
     width: 40%;
     margin: 40px auto;
     padding: 10px;
-    background: #333;
+    background: var(--black);
     border-radius: 10px;
     display: flex;
     gap: 10px;
@@ -22,3 +24,7 @@
     font-weight: bold;
     font-size: 30px;
 }
+
+  
+  
+  

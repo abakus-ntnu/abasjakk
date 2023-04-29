@@ -1,3 +1,5 @@
+@import "src/styles/app.css";
+
 .adminContent {
     width: 90%;
     margin: 0 auto;
@@ -30,11 +32,8 @@
 .adminControls .searchBox, .createUserBox, .numberOfTablesBox, input[type=button] {
     display: flex;
     align-items: center;
-    background-color: #333;
     padding: 10px;
-    border-radius: 10px;
     height: 2rem;
-    border: 1.5px solid #0496FF;
     flex-grow: 1; 
     transition: .3s;
 }
@@ -73,6 +72,7 @@
 .numberOfTablesBox h3 {
     height: 2rem;
     font-size: 1.5rem;
+    font-weight: normal;
 }
 
 .numberOfTablesBox input {
@@ -88,14 +88,20 @@
     height: 3.438rem;
     font-size: 1.5rem;
     cursor: pointer;
+    border-radius: calc(var(--borderWidth) + 5px);
+    background-color: var(--black);
 }
 
 .adminControls input[type=button]:hover {
-    background-color: #0496FF;
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    background-size: 300% 300%;
+    animation: animatedgradient 3s ease alternate infinite;
+    transform: scale(1.15);
 }
 
-
-
+.adminControls .generateRoundBox.gradient-border:hover:after {
+    transform: scaleX(.9) scaleY(.1);
+}
 
 
 h2 {
@@ -149,7 +155,7 @@ h2 {
 }
 
 .x:hover {
-    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(0px 0px 2px #222);
+    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(2px 2px 4px #222);
     transform: scale(1.1);
 }
 
@@ -161,7 +167,7 @@ h2 {
 }
 
 .save:hover {
-    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(0 0 1px #222);
+    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(2px 2px 4px #222);
     transform: scale(1.1);
 }
 

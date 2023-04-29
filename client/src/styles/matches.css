@@ -1,3 +1,5 @@
+@import "./colors";
+
 .matchesBox {
     width: 60%;
     margin: 0 auto;
@@ -16,6 +18,10 @@ table th {
     border-bottom: 1px solid white;
 }
 
+table caption {
+    font-size: 2.5rem;
+}
+
 .playerHeader, .vsHeader {
     width: 30%;
 }
@@ -24,9 +30,30 @@ tr:nth-child(odd):not(:first-child) {
     background-color: #333;
 }
 
+tr:nth-child(even):not(:nth-child(2)) {
+    background-color: #222;
+}
+
+tr:nth-of-type(5n+1):not(:nth-child(2)) {
+    color: var(--neon-blue);
+}
+
+tr:nth-of-type(5n+2) {
+    color: var(--neon-red);
+}
+
+tr:nth-of-type(5n+3) {
+    color: var(--neon-green);
+}
+
+tr:nth-of-type(5n+4) {
+    color: var(--neon-purple);
+}
+
 td {
     padding: 20px 10px;
     height: 40px;
+    text-transform: uppercase;
 }
 
 .vsBox {
