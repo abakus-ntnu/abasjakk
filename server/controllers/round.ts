@@ -1,6 +1,7 @@
 import User from "../models/user";
 import Match from "../models/match";
 import Round from "../models/round";
+import { loadSettings } from "../controllers/settings";
 import { RequestHandler } from "express";
 import { Types } from "mongoose";
 import { IUser, IRound, MatchStatus, Pair, UserId, ChessPiece } from "../types"
@@ -29,7 +30,7 @@ export const createRound: RequestHandler = async (_req, res) => {
 
   if (!previousRound) {
     const pairs = generateRandomPairs(sortedUsers);
-    const round = new Round({order: 1, matches: createMatchesFromPairs(pairs)});
+    const round = new Round({order: 1, matches: await createMatchesFromPairs(pairs)});
     round.save()
       .then(_ => res.status(201).end())
       .catch(e => res.status(500).send(e));
@@ -37,7 +38,7 @@ export const createRound: RequestHandler = async (_req, res) => {
   }
 
   const pairs = await pairingAlgorithm(sortedUsers, previousRound);
-  const round = new Round({order: previousRound.order.valueOf() + 1, matches: createMatchesFromPairs(pairs)});
+  const round = new Round({order: previousRound.order.valueOf() + 1, matches: await createMatchesFromPairs(pairs)});
   round.save()
     .then(_ => res.status(201).end())
     .catch(e => res.status(500).send(e));
@@ -55,10 +56,10 @@ const generateRandomPairs = (users: any[]) => { // Very random yes
   return randomPairs;
 }
 
-const generateRandomTables = (length: number) => {
-  const MAX_TABLES = 20; // TODO: Fetch MAX_TABLES from database
+const generateRandomTables = async (length: number) => {
+  const settings = await loadSettings();
   const numbers = [];
-  for (let i = 0; i < MAX_TABLES; i++) {
+  for (let i = 0; i < settings.tableCount; i++) {
   numbers.push(i + 1);
   }
 
@@ -78,10 +79,10 @@ const generateRandomTables = (length: number) => {
   return shuffle(numbers).slice(0, length);
 }
 
-const createMatchesFromPairs = (pairs: Pair[]) => {
+const createMatchesFromPairs = async (pairs: Pair[]) => {
   const matches: { type: Types.ObjectId, ref: "Match" }[] = [];
 
-  const tables = generateRandomTables(pairs.length);
+  const tables = await generateRandomTables(pairs.length);
   for (let i = 0; i < pairs.length; i++) {
     const match = new Match({ white: pairs[i].white, black: pairs[i].black, table: tables[i], result: MatchStatus.IN_PROGRESS });
     matches.push(match._id);
