@@ -5,6 +5,7 @@ import SearchBar from "src/components/searchBar";
 
 import "src/styles/app.css";
 import StatusMessage from "src/components/statusMessage";
+import Laser from "src/components/laser";
 
 const Home = () => {
   const [initialData, setInitialData] = useState([]);
@@ -28,11 +29,14 @@ const Home = () => {
         <img src="src/public/AbaSjakk_logo.webp" className="logo" />
         <h1>AbaSjakk</h1>
       </div>
-      <SearchBar data={initialData} setSearchedData={setSearchedData} />
+      <SearchBar type="USER" users={initialData} setUsers={setSearchedData} />
       {getUsers.isLoading || getUsers.isError ? 
-      <StatusMessage query={getUsers} /> :
-      <Leaderboard data={searchedData} initialData={initialData} />
+        <StatusMessage query={getUsers} /> :
+        <Leaderboard data={searchedData} initialData={initialData} />
       }
+
+      <Laser />
+      <div className="fade" />
     </>
   );
 };

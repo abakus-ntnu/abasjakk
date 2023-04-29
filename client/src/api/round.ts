@@ -5,7 +5,7 @@ import ApiClient from "./apiClient";
 export const GetRounds = () => useQuery({
     retry: 2,
     queryKey: "getRounds",
-    queryFn: async ():Promise<Round> => await ApiClient.get("/round/")
+    queryFn: async ():Promise<Round[]> => await ApiClient.get("/round/")
         .then(res => {
             console.log(res.status, "rounds fetched");
             return res.data;

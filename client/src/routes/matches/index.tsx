@@ -1,86 +1,41 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+import { GetRounds } from "src/api/round";
+import Laser from "src/components/laser";
 import MatchesTable from "src/components/matchesTable";
 import SearchBar from "src/components/searchBar";
+import StatusMessage from "src/components/statusMessage";
 
 import "src/styles/matches.css";
 
-const pairings = [
-    {
-        white: "Isak",
-        black: "Falk",
-        table: 4
-    },
-    {
-        white: "Jenny",
-        black: "Arash",
-        table: 7
-    },
-    {
-        white: "Ivar",
-        black: "Jonas",
-        table: 2
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 17
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    },
-    {
-        white: "Abakule1",
-        black: "Abakule2",
-        table: 10
-    }
-
-]
-
-
 const Matches = () => {
-    const [searchedData, setSearchedData] = useState(pairings);
+    const [initialData, setInitialData] = useState([]);
+    const [searchedData, setSearchedData] = useState([]);
+
+    const getRounds = GetRounds();
+
+    useEffect(() => {
+        if (getRounds.isFetched) {
+            // console.log(getRounds.data[0].matches);
+            setInitialData(getRounds.data);
+        }
+    }, [getRounds]);
+
+    useEffect(() => {
+        setSearchedData(initialData);
+    }, [initialData])
 
     return (
         <>
             <div className="titleBox">
                 <h1>Kommende kamper</h1>
             </div>
-            <SearchBar data={pairings} setSearchedData={setSearchedData} />
+            <SearchBar type="ROUND" rounds={initialData} setRounds={setSearchedData}  />
 
             <div className="matchesBox">
-                <MatchesTable data={searchedData} />
+                {getRounds.isLoading || getRounds.isError || searchedData.length === 0 ? 
+                <StatusMessage query={getRounds} /> :
+                <MatchesTable data={searchedData[0]} roundNr={initialData[initialData.length - 1].order} />
+                }
             </div>
            
 
@@ -93,7 +48,9 @@ const Matches = () => {
                 <img src="src/public/github.svg" className="github" />
                 </a>
             </div> */}
-    </>
+            <Laser />
+            <div className="fade" />
+        </>
     );
 }
 

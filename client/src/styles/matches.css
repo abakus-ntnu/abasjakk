@@ -9,12 +9,11 @@
     text-align: center;
     border-collapse: collapse;
     font-size: 20px;
-    /* font-weight: bold; */
 }
 
 table th {
     padding: 20px;
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
 }
 
 .playerHeader, .vsHeader {

@@ -1,5 +1,5 @@
 .leaderboard {
-    font-size: 30px;
+    font-size: 3rem;
     font-weight: bold;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
     display: flex;
     align-items: center;
     padding-left: 50px;
-    /* animation: changeBackgroundColor 5s linear infinite alternate; */
+    animation: changeBackgroundColor 5s linear infinite alternate;
 }
 
 .scoreNumber {

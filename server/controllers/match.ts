@@ -44,7 +44,7 @@ export const updateResult: RequestHandler = async (req, res) => {
         .then(_ => res.status(200).end())
         .catch(e => res.status(500).send(e));
 
-      // Update scores of players
+      // Update Users of players
       const resultToScore = (result: MatchStatus, piece: ChessPiece) => {
         if (result == MatchStatus.DRAW) {
           return 0.5;

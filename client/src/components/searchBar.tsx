@@ -1,31 +1,18 @@
-import { StateUpdater } from "preact/hooks";
+import { SearchBarProps, User, Round } from "src/types";
+
 import "src/styles/searchBar.css";
 
-type Props = {
-    data: Array<object>,
-    additionalData?: Array<object>,
-    setSearchedData: StateUpdater<object>,
-    setAdditionalSearchedData?: StateUpdater<object>
-}
+const SearchBar = ({ users, setUsers, rounds, setRounds, type }:SearchBarProps) => {
+    
+    const onInput = event => {
+        const search = event.target.value.toString().trim().toLowerCase();
 
-const SearchBar = ({ data, additionalData, setSearchedData, setAdditionalSearchedData }:Props) => {
-    const onInput = e => {
-        const search = e.target.value.toString().replace(/ /g, '').toLowerCase();
-        setSearchedData(data.filter(item => {
-            if (search.length > 0) {
-                return Object.values(item).some(value => value.toString().toLowerCase().startsWith(search));
-            } 
-            return true;
-        }));
-        if (setAdditionalSearchedData) {
-            setAdditionalSearchedData(additionalData.filter(item => {
-                if (search.length > 0) {
-                    return Object.values(item).some(value => value.toString().toLowerCase().startsWith(search));
-                } 
-                return true;
-            }));
-        }
+        if (type === "USER" || type === "BOTH")
+            setUsers(searchUsers(users, search));
+        if (type === "ROUND" || type === "BOTH")
+            setRounds(searchRounds(rounds, search)); 
     }
+
     return (
         <div className="searchBox">
             <img src="src/public/search.svg" />
@@ -33,5 +20,15 @@ const SearchBar = ({ data, additionalData, setSearchedData, setAdditionalSearche
         </div>
     );
 }
+
+const searchUsers = (data:User[], search:string) => (search.length > 0) ? data.filter(item => item.name.toLowerCase().startsWith(search)) : data;
+
+const searchRounds = (data:Round[], search:string) => (search.length > 0) ? data.map(round => ({
+    ...round,
+    matches: round.matches.filter(match => Object.values(match).some(value => {
+            if (typeof value !== "string" && typeof value !== "number") 
+                return value.name.toLowerCase().startsWith(search);
+    }))
+})) : data;
 
 export default SearchBar;
