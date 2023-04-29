@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface UserId {
   type: Types.ObjectId;
@@ -33,6 +33,10 @@ export interface IRound {
   _id: RoundId;
   order: number;
   matches: MatchId[]
+}
+
+export interface ISettings extends Document {
+  tableCount: number;
 }
 
 export type Pair = {

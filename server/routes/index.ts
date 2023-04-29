@@ -2,6 +2,7 @@ import express from "express";
 import userRoutes from "./user";
 import matchRoutes from "./match";
 import roundRoutes from "./round";
+import settingsRoutes from "./settings";
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.post('/checkPassword', (_req, res) => res.status(200).end());
 router.use('/user', userRoutes);
 router.use('/match', matchRoutes);
 router.use('/round', roundRoutes);
+router.use('/settings', settingsRoutes);
 
 export default router;
