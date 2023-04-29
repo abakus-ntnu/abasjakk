@@ -35,7 +35,6 @@ const Home = () => {
         <Leaderboard data={searchedData} initialData={initialData} />
       }
 
-      <Laser />
       <div className="fade" />
     </>
   );
