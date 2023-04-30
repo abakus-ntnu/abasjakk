@@ -1,6 +1,6 @@
 @import "src/styles/app.css";
 
-.searchBox {
+.searchBox, .loginBox {
     height: 40px;
     width: 40%;
     margin: 40px auto;
@@ -16,7 +16,7 @@
     filter: invert(100%);
 }
 
-.search {
+.search, .login {
     height: 100%;
     width: 100%;
     margin: 0;

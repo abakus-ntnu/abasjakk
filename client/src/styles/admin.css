@@ -29,7 +29,7 @@
     margin: auto;
 }
 
-.adminControls .searchBox, .createUserBox, .numberOfTablesBox, input[type=button] {
+.adminControls .searchBox, .createUserBox, .numberOfTablesBox, input[type=button], .loginBtn input {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -84,7 +84,7 @@
     margin-bottom: 15px;
 }
 
-.adminControls input[type=button] {
+.adminControls input[type=button], .loginBtn input {
     height: 3.438rem;
     font-size: 1.5rem;
     cursor: pointer;
@@ -92,15 +92,29 @@
     background-color: var(--black);
 }
 
-.adminControls input[type=button]:hover {
+.adminControls input[type=button]:hover, .loginBtn input:hover {
     background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
     background-size: 300% 300%;
     animation: animatedgradient 3s ease alternate infinite;
     transform: scale(1.15);
+    cursor: pointer;
 }
 
-.adminControls .generateRoundBox.gradient-border:hover:after {
+.adminControls .generateRoundBox.gradient-border:hover:after, .loginBtn input:hover:after {
     transform: scaleX(.9) scaleY(.1);
+    cursor: pointer;
+}
+
+.loginBtn {
+    width: 20rem;
+    height: 110%;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.loginBtn input {
+    width: 100%;
+    height: 80%;
 }
 
 
