@@ -12,6 +12,7 @@ router.use((req, res, next) => {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
     if (req.method == "OPTIONS") {
       res.sendStatus(200);
+      return;
     }
     next();
 });
