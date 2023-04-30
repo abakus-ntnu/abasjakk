@@ -27,6 +27,11 @@ export type Round = {
   matches: Match[]
 }
 
+export type ProtectedRouteProps = {
+  path: string,
+  component: any
+}
+
 export type StatusMessageProps = {
   query?: UseQueryResult<User[], unknown> | UseQueryResult<Round[], unknown>,
   status?: string

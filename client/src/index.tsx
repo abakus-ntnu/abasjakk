@@ -8,10 +8,12 @@ import Matches from "./routes/matches";
 
 import "./styles/app.css";
 import Laser from "./components/laser";
+import ProtectedRoute from "./components/protectedRoute";
 
 const queryClient = new QueryClient();
 
 function App() {
+
   const nav = useRef(null);
 
   const switchClass = (event) => {
@@ -31,11 +33,11 @@ function App() {
         </nav>
         <Router>
           <Route path="/" component={Home} default />
-          <Route path="/admin" component={Admin} />
           <Route path="/matches" component={Matches} />
+          <ProtectedRoute path="/admin" component={Admin} />
         </Router>
       </main>
-      <Laser/>
+      <Laser />
     </QueryClientProvider>
   );
 }
