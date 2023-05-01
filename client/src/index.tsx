@@ -1,35 +1,35 @@
 import { render } from "preact";
 import { useRef } from "preact/hooks";
-import { Route, Router, Link, getCurrentUrl } from "preact-router";
+import { Route, Router, getCurrentUrl, route } from "preact-router";
+import { Link } from "preact-router/match";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ProtectedRoute from "./components/protectedRoute";
 import Home from "./routes/home";
 import Admin from "./routes/admin";
 import Matches from "./routes/matches";
+import Laser from "./components/laser";
 
 import "./styles/app.css";
-import Laser from "./components/laser";
-import ProtectedRoute from "./components/protectedRoute";
 
 const queryClient = new QueryClient();
 
 function App() {
 
+   // stupid <Link> does not work properly (probably gotta sell my soul to the devil to find out why) 
+   // so I have to do all this..
   const nav = useRef(null);
-
   const switchClass = (event) => {
     for (const link of nav.current.children)
       link.className = null;
     event.target.className = "active-link";
   }
-  const currentPath = getCurrentUrl();
 
   return (
     <QueryClientProvider client={queryClient}>
       <main>
         <nav ref={nav}>
-          <Link href="/" className={currentPath == "/" ? "active-link" : null} onClick={switchClass}>HJEM</Link>
-          <Link href="/matches" className={currentPath == "/matches" ? "active-link" : null} onClick={switchClass}>KAMPER</Link>
-          <Link href="/admin" className={currentPath == "/admin" ? "active-link" : null} onClick={switchClass}>ADMIN</Link>
+          <Link href={"/"} activeClassName="active-link" onClick={(e) => {route("/"); switchClass(e)}}>HJEM</Link>
+          <Link href={"/matches"} activeClassName="active-link" onClick={(e) => {route("/matches"); switchClass(e)}}>KAMPER</Link>
         </nav>
         <Router>
           <Route path="/" component={Home} default />
@@ -41,6 +41,5 @@ function App() {
     </QueryClientProvider>
   );
 }
-
 
 render(<App />, document.getElementById("root"));

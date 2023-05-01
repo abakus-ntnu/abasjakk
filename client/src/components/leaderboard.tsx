@@ -24,20 +24,24 @@ const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
 
     return (
         <div className={"leaderboard"}>
+            {/* <div className="leaderboardHeaders">
+                <div>Plass</div>
+                <div>Navn</div>
+                <div>Poeng</div>
+            </div> */}
             {data.map(score => <Score key={score.name} name={score.name} score={score.score} pos={initialData.indexOf(score) + 1} />)}
-            {data.length === 0 && <StatusMessage status="no-result" />}
+            {data.length === 0 && <StatusMessage status="no-results" />}
+            <br />
         </div>
     );
 }
 
 const Score = ({name, score, pos}:ScoreProps) => {
     return (
-        <div className="scoreBox">
+        <div className={`scoreBox gradient-border${pos === 1 ? " first": ""}`}>
             <div className="position">{pos}</div>
-            <div className="score">
-                <p className="name">{name}</p>
-                <div className="scoreNumber">{score}</div>
-            </div>
+            <div className="name">{name}</div>
+            <div className="scoreNumber">{score}p</div>
         </div>
     );
 }

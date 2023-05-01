@@ -26,5 +26,11 @@
 }
 
   
-  
+@media (max-width: 1000px) {
+     
+    .searchBox {
+        width: 90%;
+        margin-top: 5px;
+    }
+} 
   

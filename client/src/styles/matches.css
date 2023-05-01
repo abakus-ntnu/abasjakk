@@ -10,7 +10,8 @@
     margin: 0 auto;
     text-align: center;
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 1.6rem;
+    table-layout: fixed;
 }
 
 table th {
@@ -18,12 +19,24 @@ table th {
     border-bottom: 1px solid white;
 }
 
+table tr {
+    width: 100%;
+}
+
 table caption {
     font-size: 2.5rem;
 }
 
 .playerHeader, .vsHeader {
-    width: 30%;
+    width: 20% !important;
+}
+
+.playerHeader {
+    overflow: hidden;
+}
+
+.tableColum {
+    width: 20%;
 }
 
 tr:nth-child(odd):not(:first-child) {
@@ -54,6 +67,7 @@ td {
     padding: 20px 10px;
     height: 40px;
     text-transform: uppercase;
+    overflow: hidden;
 }
 
 .vsBox {
@@ -78,25 +92,18 @@ hr {
 }
 
 
-@media only screen and (max-width: 1000px) {
+@media (max-width: 1000px) {
     .titleBox {
-        margin: 20px auto;
-    }
-
-    h1 {
-        font-size: 1rem;
-    }
- 
-    .searchBox {
-        width: 90%;
+        margin: 2rem auto 4rem !important; /* I know, not good practice, but i cant be bothered */
+        height: 8rem !important;
     }
 
     .matchesBox {
-        width: 90%;
+        width: 98%;
     }
 
-    .playerHeader {
-        width: 30%;
+    .matchesList {
+        font-size: 1rem;
     }
 
     .vsHeader {
@@ -109,9 +116,9 @@ hr {
         gap: 0;
     }
 
-    table img {
+    /* table img {
         visibility: hidden;
-    }
+    } */
 
     td {
         padding: 10px 5px;

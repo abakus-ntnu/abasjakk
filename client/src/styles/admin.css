@@ -50,7 +50,7 @@
 }
 
 .createUserIcon {
-    filter: brightness(0) saturate(100%) invert(39%) sepia(87%) saturate(2503%) hue-rotate(186deg) brightness(105%) contrast(104%);
+    filter: invert(100%); 
     transition: .3s;
     cursor: pointer;
     transform: scale(1.4);
@@ -58,7 +58,7 @@
 }
 
 .createUserIcon:hover {
-    filter: brightness(0) saturate(100%) invert(39%) sepia(87%) saturate(2503%) hue-rotate(186deg) brightness(105%) contrast(104%)drop-shadow(0px 0px 2px #222);
+    filter: invert(100%) drop-shadow(0px 0px 2px #222);
     transform: scale(1.6);
 }
 
@@ -186,3 +186,28 @@ h2 {
 }
 
 
+
+
+select {
+    padding: 1rem;
+}
+
+.adminMatches .matchList {
+    width: 100%;
+} 
+
+/* .adminMatches .playerheader {
+    width: 15%;
+} */
+
+.adminMatches .vsHeader {
+    width: 10% !important;
+}
+
+/* .adminMatches .tableColum {
+    width: 20%; 
+} */
+
+.adminMatches .resultColumn {
+    width: 20%;
+}
