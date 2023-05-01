@@ -27,6 +27,10 @@ export type Round = {
   matches: Match[]
 }
 
+export type Settings = {
+  tableCount: number
+}
+
 export type ProtectedRouteProps = {
   path: string,
   component: any

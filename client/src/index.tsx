@@ -1,6 +1,6 @@
 import { render } from "preact";
 import { useRef } from "preact/hooks";
-import { Route, Router, getCurrentUrl, route } from "preact-router";
+import { Route, Router, route } from "preact-router";
 import { Link } from "preact-router/match";
 import { QueryClient, QueryClientProvider } from "react-query";
 import ProtectedRoute from "./components/protectedRoute";

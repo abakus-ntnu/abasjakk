@@ -9,7 +9,7 @@ const StatusMessage = ({ query, status }:StatusMessageProps) => {
             <p className="error"><b>{query.error.message}</b><br />An error has occured :/</p>
         );
         if (query.status === "success") return (
-            <p className="success">DB is emptyn</p>
+            <p className="success">Oi her var det tomt!</p>
         )
     }
     if (status === "no-results") return (

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { GetUsers, CreateUser } from "src/api/user";
 import { GetRounds, CreateRound } from "src/api/round";
+import { GetTableCount, SetTableCount } from "src/api/settings";
 import AdminLeaderboard from "src/components/adminLeaderboard";
 import MatchesTable from "src/components/matchesTable";
 import SearchBar from "src/components/searchBar";
@@ -11,17 +12,21 @@ import "src/styles/admin.css";
 
 const Admin = () => {
   const [createUserInputValue, setCreateUserInputValue] = useState('');
+  const [tableCountValue, setTableCountValue] = useState(0);
 
   const [initialUsers, setInitialUsers] = useState([]);
   const [searchedUsers, setSearchedUsers] = useState([]);
 
   const [initialRounds, setInitialRounds] = useState([]);
   const [searchedRounds, setSearchedRounds] = useState([]);
+
   
   const getUsers = GetUsers();
   const createUser = CreateUser();
   const getRounds = GetRounds();
   const createRound = CreateRound();
+  const getTableCount = GetTableCount();
+  const setTableCount = SetTableCount();
 
   useEffect(() => {
     if (getUsers.isFetched) setInitialUsers(getUsers.data);
@@ -35,9 +40,13 @@ const Admin = () => {
   useEffect(() => {
     setSearchedRounds(initialRounds);
   }, [initialRounds]);
+  
+  useEffect(() => {
+    if (getTableCount.isFetched) setTableCountValue(getTableCount.data);
+  }, [getTableCount])
 
 
-  const handleChange = (event) => setCreateUserInputValue(event.target.value)
+  const handleChange = (event) => setCreateUserInputValue(event.target.value);
   const handleKeyDown = (event) => event.key === "Enter" && submit();
 
   const submit = () => {
@@ -61,6 +70,17 @@ const Admin = () => {
       });
   }
 
+  const handleChangeTableCount = event => {
+    setTableCountValue(event.target.value);
+  }
+
+  const handleKeyDownTableCount = event => {
+    event.key === "Enter" && setTableCount.mutate({
+      tableCount: event.target.value
+    });
+
+  };
+  
   return (
     <>
       <h1 className="adminTitle">Admin</h1>
@@ -72,7 +92,7 @@ const Admin = () => {
         </div>
         <div className="numberOfTablesBox gradient-border">
           <h3>Antall bord:</h3>
-          <input type="number" value={10} min={0} placeholder="0" />
+          <input type="number" min={0} placeholder={tableCountValue.toString()} onChange={handleChangeTableCount} onKeyDown={handleKeyDownTableCount} />
         </div>
         <div className="generateRoundBox gradient-border">
           <input type="button" value="Generer ny runde" onClick={generateRound} />
