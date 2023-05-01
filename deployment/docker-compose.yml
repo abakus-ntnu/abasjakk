@@ -1,0 +1,17 @@
+---
+version: "3.7"
+
+services:
+  client:
+    build: ../client/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+  server:
+    build: ../server/
+    ports:
+      - "8000:8000"
+    environment:
+      - PASSWORD=FALKERKUL
+      - MONGO_URL=mongodb://mongo:27017/abasjakk
