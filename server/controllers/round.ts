@@ -94,30 +94,35 @@ const createMatchesFromPairs = async (pairs: Pair[]) => {
 
 const pairingAlgorithm = async (sortedUsers: IUser[], previousRound: IRound) => { // TODO: Rewrite this mess
   const newPairings: Pair[] = [];
-  const previousPairings: Pair[] = [];
-  const playerToPiece: Map<UserId, ChessPiece> = new Map();
-  const playerToOpponent: Map<UserId, UserId> = new Map();
+  const playerToPiece: Map<string, ChessPiece> = new Map();
+  const playerToOpponent: Map<string, string> = new Map();
 
   // This is definitely NOT the most efficient way of doing it, but i don't give a single shit
   for (let i = 0; i < previousRound.matches.length; i++) {
     const match = await Match.findById(previousRound.matches[i]);
     if (!match) continue;
-    previousPairings.push({white: match.white, black: match.black });
 
-    playerToPiece.set(match.white, ChessPiece.WHITE);
-    playerToPiece.set(match.black, ChessPiece.BLACK);
-    playerToOpponent.set(match.white, match.black);
-    playerToOpponent.set(match.black, match.white);
+    playerToPiece.set(match.white.toString(), ChessPiece.WHITE);
+    playerToPiece.set(match.black.toString(), ChessPiece.BLACK);
+    playerToOpponent.set(match.white.toString(), match.black.toString());
+    playerToOpponent.set(match.black.toString(), match.white.toString());
   }
+
+  // for (let i = 0; i < sortedUsers.length; i++ ) {
+  //   const player = sortedUsers[i];
+  //   console.log(player.name);
+  //   console.log(playerToPiece.get(player._id.toString()));
+  //   console.log(playerToOpponent.get(player._id.toString()));
+  // }
 
   while (sortedUsers.length > 1) {
     const player = sortedUsers.shift();
     if (player === undefined) break;
-    const newOpponentId = (playerToOpponent.get(player._id) == sortedUsers[0]._id) ? 1 : 0;
+    const newOpponentId = (playerToOpponent.get(player._id.toString()) == sortedUsers[0]._id.toString()) ? 1 : 0;
     const newOpponent = sortedUsers[newOpponentId];
     // Assign colors
     let p: Pair = { white: newOpponent._id, black: player._id };
-    if (playerToPiece.get(player._id) == ChessPiece.BLACK && playerToPiece.get(newOpponent._id) == ChessPiece.WHITE) p = { white : player._id, black: newOpponent._id }
+    if (playerToPiece.get(player._id.toString()) == ChessPiece.BLACK && playerToPiece.get(newOpponent._id.toString()) == ChessPiece.WHITE) p = { white : player._id, black: newOpponent._id }
     newPairings.push(p);
     // Remove shit
     sortedUsers.splice(newOpponentId, 1);
