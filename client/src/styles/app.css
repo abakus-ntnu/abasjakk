@@ -25,7 +25,7 @@ body {
 }
 
 main {
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 #app {
@@ -155,9 +155,6 @@ td {
   vertical-align: middle;
 }
 
-
-
-
 .gradient-border {
   --borderWidth: 3px;
   background: var(--black);
@@ -196,6 +193,6 @@ td {
 
 @media (max-width: 1000px) {
   h1 {
-    font-size: 4rem;
+    font-size: 2rem;
   }
 }

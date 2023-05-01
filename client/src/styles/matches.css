@@ -27,11 +27,11 @@ table caption {
 }
 
 tr:nth-child(odd):not(:first-child) {
-    background-color: #333;
+    background-color: rgba(40, 40, 40, .8);
 }
 
 tr:nth-child(even):not(:nth-child(2)) {
-    background-color: #222;
+    background-color: rgba(30, 30, 30, .8);
 }
 
 tr:nth-of-type(5n+1):not(:nth-child(2)) {
@@ -84,9 +84,9 @@ hr {
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 1rem;
     }
-
+ 
     .searchBox {
         width: 90%;
     }

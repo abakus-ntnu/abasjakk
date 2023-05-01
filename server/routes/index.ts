@@ -3,6 +3,7 @@ import userRoutes from "./user";
 import matchRoutes from "./match";
 import roundRoutes from "./round";
 import settingsRoutes from "./settings";
+import loginRoutes from "./login";
 
 const router = express.Router();
 
@@ -30,11 +31,10 @@ router.use((req, res, next) => {
   }
 });
 
-router.post('/checkPassword', (_req, res) => res.status(200).end());
-
 router.use('/user', userRoutes);
 router.use('/match', matchRoutes);
 router.use('/round', roundRoutes);
 router.use('/settings', settingsRoutes);
+router.use('/login', loginRoutes);
 
 export default router;
