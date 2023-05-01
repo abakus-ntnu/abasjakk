@@ -2,8 +2,8 @@
   "name": "abasjakk-server",
   "version": "2.1.0",
   "scripts": {
-    "build:express": " rm -rf dist && tsc",
-    "start": "tsc -w & nodemon dist/index.js"
+    "build:express": "rm -rf dist && tsc",
+    "start": "tsc && bun run dist/index.js"
   },
 "dependencies": {
     "@types/cors": "^2.8.13",
