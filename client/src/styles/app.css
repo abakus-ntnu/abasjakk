@@ -25,7 +25,7 @@ body {
 }
 
 main {
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 #app {
@@ -195,6 +195,7 @@ td {
   h1 {
     font-size: 3.5rem;
   }
+  
   .logo {
     height: 5rem;
     padding: .5rem;
