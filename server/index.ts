@@ -4,7 +4,7 @@ import router from "./routes";
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect("mongodb://mongo:27017/abasjakk", {
+  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/abasjakk", {
     dbName: "abasjakk",
     retryWrites: true,
     w: "majority",

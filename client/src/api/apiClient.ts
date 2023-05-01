@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ApiClient = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.API_URL || "http://localhost:8000",
     headers: {
       password: sessionStorage.getItem("admin_password")
     },

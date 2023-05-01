@@ -4,17 +4,5 @@ version: "3.7"
 services:
   mongo:
     image: mongo:4.4
-  client:
-    build: ./client/
     ports:
-      - "3000:3000"
-    depends_on:
-      - server
-  server:
-    build: ./server/
-    ports:
-      - "8000:8000"
-    depends_on:
-      - mongo
-    environment:
-      - PASSWORD=FALKERKUL
+      - "127.0.0.1:27017:27017"
