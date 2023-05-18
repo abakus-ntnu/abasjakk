@@ -10,6 +10,7 @@ import Matches from "./routes/matches";
 import Laser from "./components/laser";
 
 import "./styles/app.css";
+import Polls from "./routes/polls";
 
 const queryClient = new QueryClient();
 
@@ -30,10 +31,12 @@ function App() {
         <nav ref={nav}>
           <Link href={"/"} activeClassName="active-link" onClick={(e) => {route("/"); switchClass(e)}}>HJEM</Link>
           <Link href={"/matches"} activeClassName="active-link" onClick={(e) => {route("/matches"); switchClass(e)}}>KAMPER</Link>
+          <Link href={"/polls"} activeClassName="active-link" onClick={(e) => {route("polls"); switchClass(e)}}>POLLS</Link>
         </nav>
         <Router>
           <Route path="/" component={Home} default />
           <Route path="/matches" component={Matches} />
+          <Route path="/polls" component={Polls} />
           <ProtectedRoute path="/admin" component={Admin} />
         </Router>
       </main>

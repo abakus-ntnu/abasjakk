@@ -72,13 +72,13 @@ main {
 }
 
 nav {
-  width: 20%;
+  width: 30%;
   margin: 20px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  font-size: 25px;
+  gap: 2rem;
+  font-size: 1.5rem;
   border-bottom: 3px solid rgba(255, 255, 255, 0.87);
 }
 
@@ -203,5 +203,11 @@ td {
 
   nav {
     width: 85%;
+    font-size: 1rem;
+    gap: 1rem;
+  }
+
+  nav * {
+    font-weight: bold;
   }
 }

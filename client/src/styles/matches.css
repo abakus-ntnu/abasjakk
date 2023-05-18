@@ -116,9 +116,9 @@ hr {
         gap: 0;
     }
 
-    /* table img {
+    table img {
         visibility: hidden;
-    } */
+    }
 
     td {
         padding: 10px 5px;
