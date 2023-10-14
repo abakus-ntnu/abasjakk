@@ -1,7 +1,7 @@
 import User from "../models/user";
 import Match from "../models/match";
 import Round from "../models/round";
-import { loadSettings } from "../controllers/settings";
+// import { loadSettings } from "../controllers/settings";
 import { RequestHandler } from "express";
 import { Types } from "mongoose";
 import { IUser, IRound, MatchStatus, Pair, UserId, ChessPiece } from "../types"
@@ -25,7 +25,8 @@ export const getRounds: RequestHandler = async (_req, res) => {
 };
 
 export const createRound: RequestHandler = async (_req, res) => {
-  const sortedUsers = await User.find().sort("-score");
+  const sortedUsers = (await User.find().sort("-score")).filter(user => !user.isDeleted);
+  console.log(sortedUsers.map(user => user.name))
   const previousRound = await Round.findOne().sort("-order");
 
   if (!previousRound) {
@@ -57,9 +58,10 @@ const generateRandomPairs = (users: any[]) => { // Very random yes
 }
 
 const generateRandomTables = async (length: number) => {
-  const settings = await loadSettings();
+  // const settings = await loadSettings();
+  const numberOfTables = Math.ceil((await User.find()).length / 2);
   const numbers = [];
-  for (let i = 0; i < settings.tableCount; i++) {
+  for (let i = 0; i < numberOfTables; i++) {
   numbers.push(i + 1);
   }
 
