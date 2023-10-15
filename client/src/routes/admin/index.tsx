@@ -12,7 +12,7 @@ import "@/styles/admin.css";
 
 const Admin = () => {
   const [createUserInputValue, setCreateUserInputValue] = useState('');
-  const [tableCountValue, setTableCountValue] = useState(0);
+  // const [tableCountValue, setTableCountValue] = useState(0);
 
   const [initialUsers, setInitialUsers] = useState([]);
   const [searchedUsers, setSearchedUsers] = useState([]);
@@ -25,8 +25,8 @@ const Admin = () => {
   const createUser = CreateUser();
   const getRounds = GetRounds();
   const createRound = CreateRound();
-  const getTableCount = GetTableCount();
-  const setTableCount = SetTableCount();
+  // const getTableCount = GetTableCount();
+  // const setTableCount = SetTableCount();
 
   useEffect(() => {
     if (getUsers.isFetched) setInitialUsers(getUsers.data);
@@ -41,9 +41,9 @@ const Admin = () => {
     setSearchedRounds(initialRounds);
   }, [initialRounds]);
   
-  useEffect(() => {
-    if (getTableCount.isFetched) setTableCountValue(getTableCount.data);
-  }, [getTableCount])
+  // useEffect(() => {
+  //   if (getTableCount.isFetched) setTableCountValue(getTableCount.data);
+  // }, [getTableCount])
 
 
   const handleChange = (event) => setCreateUserInputValue(event.target.value);
@@ -70,16 +70,15 @@ const Admin = () => {
       });
   }
 
-  const handleChangeTableCount = event => {
-    setTableCountValue(event.target.value);
-  }
+  // const handleChangeTableCount = event => {
+  //   setTableCountValue(event.target.value);
+  // }
 
-  const handleKeyDownTableCount = event => {
-    event.key === "Enter" && setTableCount.mutate({
-      tableCount: event.target.value
-    });
-
-  };
+  // const handleKeyDownTableCount = event => {
+  //   event.key === "Enter" && setTableCount.mutate({
+  //     tableCount: event.target.value
+  //   });
+  // };
   
   return (
     <>
@@ -90,10 +89,10 @@ const Admin = () => {
             <input placeholder="Legg til ny bruker" onChange={handleChange} onKeyDown={handleKeyDown} value={createUserInputValue} />
             <img src="@/public/new-user.svg" className="createUserIcon" onClick={() => submit()} />
         </div>
-        <div className="numberOfTablesBox gradient-border">
+        {/* <div className="numberOfTablesBox gradient-border">
           <h3>Antall bord:</h3>
           <input type="number" min={0} placeholder={tableCountValue.toString()} onChange={handleChangeTableCount} onKeyDown={handleKeyDownTableCount} />
-        </div>
+        </div> */}
         <div className="generateRoundBox gradient-border">
           <input type="button" value="Generer ny runde" onClick={generateRound} />
         </div>
@@ -102,7 +101,7 @@ const Admin = () => {
         <div className="adminLeaderboard">
           {getUsers.isLoading || getUsers.isError || searchedUsers.length == 0 ? 
             <StatusMessage query={getUsers} /> : 
-            <AdminLeaderboard data={searchedUsers} initialData={initialUsers} getUsersQuery={getUsers} />
+            <AdminLeaderboard data={searchedUsers} initialData={initialUsers} getUsersQuery={getUsers} hasStarted={initialRounds.length !== 0} />
           }
         </div>
         <div className="verticalLine" />

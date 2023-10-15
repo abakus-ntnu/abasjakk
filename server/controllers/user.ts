@@ -13,7 +13,12 @@ export const createUser: RequestHandler = async (req, res) => {
     return;
   }
 
-  const user = new User({name:req.body.name, score: req.body.score ?? 0});
+  const existingUser = await User.findOne({ name: req.body.name })
+  if (existingUser) {
+    return res.status(400).send('Username already exists');
+  }
+
+  const user = new User({name:req.body.name, score: req.body.score ?? 0, isDeleted: false});
   user.save()
     .then(_ => res.status(201).send(user._id))
     .catch(e => res.status(500).send(e));
@@ -35,3 +40,9 @@ export const deleteUser: RequestHandler = async (req, res) => {
     .then(_ => res.status(200).end())
     .catch(e => res.status(404).send(e));
 };
+
+export const softDeleteUser: RequestHandler = async (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { isDeleted: true })
+    .then(_ => res.status(200).end())
+    .catch(e => res.status(404).send(e))
+}

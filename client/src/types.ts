@@ -4,7 +4,8 @@ import { UseQueryResult } from "react-query"
 export type User = {
   _id?: string,
   name: string,
-  score?: number
+  score?: number,
+  isDeleted?: boolean
 }
 
 export type Match = {
@@ -53,7 +54,8 @@ export interface SearchBarProps {
 export interface LeaderboardProps {
   data: User[],
   initialData: User[],
-  getUsersQuery: UseQueryResult<User[], unknown>
+  getUsersQuery: UseQueryResult<User[], unknown>,
+  hasStarted?: boolean
 }
 
 export interface MatchesTableProps {
