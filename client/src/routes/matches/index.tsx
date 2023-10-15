@@ -1,11 +1,11 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetRounds } from "src/api/round";
-import Laser from "src/components/laser";
-import MatchesTable from "src/components/matchesTable";
-import SearchBar from "src/components/searchBar";
-import StatusMessage from "src/components/statusMessage";
+import { GetRounds } from "@/api/round";
+import Laser from "@/components/laser";
+import MatchesTable from "@/components/matchesTable";
+import SearchBar from "@/components/searchBar";
+import StatusMessage from "@/components/statusMessage";
 
-import "src/styles/matches.css";
+import "@/styles/matches.css";
 
 const Matches = () => {
     const [initialData, setInitialData] = useState([]);
@@ -45,7 +45,7 @@ const Matches = () => {
             
             {/* <div className="footer">
                 <a href="https://github.com/Abakus-ntnu">
-                <img src="src/public/github.svg" className="github" />
+                <img src="/src/public/github.svg" className="github" />
                 </a>
             </div> */}
             <div className="fade" />

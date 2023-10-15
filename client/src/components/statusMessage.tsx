@@ -1,4 +1,4 @@
-import { StatusMessageProps } from "src/types";
+import { StatusMessageProps } from "@/types";
 
 const StatusMessage = ({ query, status }:StatusMessageProps) => {
     if (query) {

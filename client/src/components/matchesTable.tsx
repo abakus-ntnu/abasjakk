@@ -1,5 +1,5 @@
-import { Match, MatchesTableProps, result } from "src/types"
-import { UpdateResult } from "src/api/match";
+import { Match, MatchesTableProps, result } from "@/types"
+import { UpdateResult } from "@/api/match";
 import StatusMessage from "./statusMessage";
 
 const MatchesTable = ({ data, roundNr, isAdmin = false, getUsers }:MatchesTableProps) => {
@@ -31,9 +31,9 @@ const MatchesTable = ({ data, roundNr, isAdmin = false, getUsers }:MatchesTableP
                     <tr key={index}>
                         <td>{match.white.name || "DELETED"}</td>
                         <td className="vsBox">
-                            <img src="src/public/king.svg" className="whiteKing" />  
+                            <img src="/src/public/king.svg" className="whiteKing" />  
                             <p>VS</p>
-                            <img src="src/public/king.svg" /> 
+                            <img src="/src/public/king.svg" /> 
                         </td>
                         <td>{match.black.name || "DELETED"}</td>
                         <td>{match.table || "?"}</td>

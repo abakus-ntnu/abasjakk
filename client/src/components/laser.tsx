@@ -1,4 +1,4 @@
-import "src/styles/laser.css";
+import "@/styles/laser.css";
 
 
 const Laser = () => {

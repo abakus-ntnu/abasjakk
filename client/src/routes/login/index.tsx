@@ -1,8 +1,8 @@
 import { useState } from "preact/hooks";
 
-import "src/styles/app.css";
-import "src/styles/searchBar.css";
-import "src/styles/admin.css";
+import "@/styles/app.css";
+import "@/styles/searchBar.css";
+import "@/styles/admin.css";
 
 const Login = () => {
 
