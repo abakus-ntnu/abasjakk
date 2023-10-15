@@ -1,8 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
-import { JSXInternal } from "preact/src/jsx";
-import { DeleteUser, UpdateUser } from "src/api/user";
-import "src/styles/leaderboard.css";
-import { LeaderboardProps } from "src/types";
+import { DeleteUser, UpdateUser } from "@/api/user";
+import "@/styles/leaderboard.css";
+import { LeaderboardProps } from "@/types";
 
 const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps) => {
     
@@ -49,8 +48,8 @@ const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps
                         <td><input type="text" className="inputName" value={user.name} onChange={(e) => handleChange(user._id, e, true)} /></td>
                         <td><input type="number" className="inputScore" value={user.score} onChange={(e) => handleChange(user._id, e)} /></td>
                         <td className="imageBox">
-                            <img src="src/public/save.svg" className="save" onClick={() => Update(user._id)} />
-                            <img src="src/public/x.svg" className="x" onClick={() => Delete(user._id)} />
+                            <img src="/src/public/save.svg" className="save" onClick={() => Update(user._id)} />
+                            <img src="/src/public/x.svg" className="x" onClick={() => Delete(user._id)} />
                         </td>
                     </tr>
                 );

@@ -1,4 +1,4 @@
-@import "src/styles/app.css";
+@import "./app.css";
 
 .searchBox, .loginBox {
     height: 40px;

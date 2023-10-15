@@ -1,11 +1,11 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetUsers } from "src/api/user";
-import Leaderboard from "src/components/leaderboard";
-import SearchBar from "src/components/searchBar";
+import { GetUsers } from "@/api/user";
+import Leaderboard from "@/components/leaderboard";
+import SearchBar from "@/components/searchBar";
 
-import "src/styles/app.css";
-import StatusMessage from "src/components/statusMessage";
-import Laser from "src/components/laser";
+import "@/styles/app.css";
+import StatusMessage from "@/components/statusMessage";
+import Laser from "@/components/laser";
 
 const Home = () => {
   const [initialData, setInitialData] = useState([]);
@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <div className="titleBox">
-        <img src="src/public/AbaSjakk_logo.webp" className="logo" />
+        <img src="/src/public/AbaSjakk_logo.webp" className="logo" />
         <h1>AbaSjakk</h1>
       </div>
       <SearchBar type="USER" users={initialData} setUsers={setSearchedData} />

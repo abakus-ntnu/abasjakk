@@ -2,6 +2,7 @@ client/node_modules
 client/build
 client/*.log
 client/.env
+client/dist/
 
 server/dist
 server/node_modules

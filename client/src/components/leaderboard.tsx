@@ -1,4 +1,4 @@
-import "src/styles/leaderboard.css";
+import "@/styles/leaderboard.css";
 import StatusMessage from "./statusMessage";
 
 type LeaderboardProps = {
