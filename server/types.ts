@@ -19,6 +19,7 @@ export interface IUser {
   _id: UserId;
   name: string;
   score: number;
+  isDeleted: boolean;
 }
 
 export interface IMatch {

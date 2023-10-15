@@ -1,10 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-import { JSXInternal } from "preact/src/jsx";
-import { DeleteUser, UpdateUser } from "src/api/user";
+import { GetRounds } from "src/api/round";
+import { DeleteUser, SoftDeleteUser, UpdateUser } from "src/api/user";
 import "src/styles/leaderboard.css";
 import { LeaderboardProps } from "src/types";
 
-const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps) => {
+const AdminLeaderboard = ({ data, initialData, getUsersQuery, hasStarted }: LeaderboardProps) => {
     
     const [users, setUsers] = useState(data);
 
@@ -14,10 +14,14 @@ const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps
     }, [data]);
     
     const deleteUser = DeleteUser();
+    const softDeleteUser = SoftDeleteUser();
     const updateUser = UpdateUser();
     const Delete = (id: string) => deleteUser.mutate(users.find(user => user._id === id), {
         onSuccess: () => getUsersQuery.refetch()
     });
+    const SoftDelete = (id: string) => softDeleteUser.mutate(users.find(user => user._id === id), {
+        onSuccess: () => getUsersQuery.refetch()
+    })
     const Update = (id: string) => updateUser.mutate(users.find(user => user._id === id), {
         onSuccess: () => getUsersQuery.refetch()
     });
@@ -44,13 +48,13 @@ const AdminLeaderboard = ({ data, initialData, getUsersQuery }: LeaderboardProps
             </tr>
             {data.map((user, index) => {
                 return (
-                    <tr key={index}>
+                    <tr key={index} className={user.isDeleted ? "deleted" : ""}>
                         <td>{initialData.indexOf(user) + 1}</td>
-                        <td><input type="text" className="inputName" value={user.name} onChange={(e) => handleChange(user._id, e, true)} /></td>
-                        <td><input type="number" className="inputScore" value={user.score} onChange={(e) => handleChange(user._id, e)} /></td>
+                        <td><input type="text" className="inputName" style={{ textDecoration: user.isDeleted && "line-through"}} value={user.name} onChange={(e) => handleChange(user._id, e, true)} /></td>
+                        <td><input type="number" className="inputScore" style={{ textDecoration: user.isDeleted && "line-through"}} value={user.score} onChange={(e) => handleChange(user._id, e)} /></td>
                         <td className="imageBox">
                             <img src="src/public/save.svg" className="save" onClick={() => Update(user._id)} />
-                            <img src="src/public/x.svg" className="x" onClick={() => Delete(user._id)} />
+                            <img src="src/public/x.svg" className="x" onClick={() => hasStarted ? SoftDelete(user._id) : Delete(user._id)} />
                         </td>
                     </tr>
                 );
