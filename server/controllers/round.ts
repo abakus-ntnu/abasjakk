@@ -26,7 +26,6 @@ export const getRounds: RequestHandler = async (_req, res) => {
 
 export const createRound: RequestHandler = async (_req, res) => {
   const sortedUsers = (await User.find().sort("-score")).filter(user => !user.isDeleted);
-  console.log(sortedUsers.map(user => user.name))
   const previousRound = await Round.findOne().sort("-order");
 
   if (!previousRound) {
