@@ -62,4 +62,3 @@ const AdminLeaderboard = ({ data, initialData, getUsersQuery, hasStarted }: Lead
     );
 }
 
-export default AdminLeaderboard;
