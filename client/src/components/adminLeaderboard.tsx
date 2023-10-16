@@ -1,8 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetRounds } from "src/api/round";
-import { DeleteUser, SoftDeleteUser, UpdateUser } from "src/api/user";
-import "src/styles/leaderboard.css";
-import { LeaderboardProps } from "src/types";
+import { DeleteUser, SoftDeleteUser, UpdateUser } from "@/api/user";
+import { LeaderboardProps } from "@/types";
+import "@/styles/leaderboard.css";
 
 const AdminLeaderboard = ({ data, initialData, getUsersQuery, hasStarted }: LeaderboardProps) => {
     
