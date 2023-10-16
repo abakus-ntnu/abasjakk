@@ -20,7 +20,11 @@ export const CreateUser = () => useMutation({
     mutationKey: "createUser",
     mutationFn: async (user:User):Promise<void> => await ApiClient.post("/user/", user)
         .then(res => console.log(res.status, "user created"))
-        .catch(err => err)
+        .catch(err => {
+            if (err.response.status === 400) {
+                console.log(err.response.status, "Username already exists")
+            }
+        })
 });
 
 export const UpdateUser = () => useMutation({
@@ -38,3 +42,11 @@ export const DeleteUser = () => useMutation({
         .then(res => console.log(res.status, "user deleted"))
         .catch(err => err)
 });
+
+export const SoftDeleteUser = () => useMutation({
+    retry: 2,
+    mutationKey: "softDeleteUser",
+    mutationFn: async (user:User):Promise<void> => await ApiClient.put(`/user/${user._id}/softDelete`)
+        .then(res => console.log(res.status, "user soft deleted"))
+        .catch(err => err)
+})
