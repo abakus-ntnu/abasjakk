@@ -10,9 +10,10 @@
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
 
     "paths": {
+      "@/*": ["*"],
       "react": ["node_modules/preact/compat"],
       "react-dom": ["./node_modules/preact/compat"]
     }

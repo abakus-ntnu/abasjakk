@@ -1,8 +1,8 @@
 import { Route } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
-import { CheckPassword } from "src/api/login";
-import { ProtectedRouteProps } from "src/types";
-import Login from "src/routes/login";
+import { CheckPassword } from "@/api/login";
+import { ProtectedRouteProps } from "@/types";
+import Login from "@/routes/login";
 
 const ProtectedRoute = ({path, component}:ProtectedRouteProps) => {
 

@@ -1,6 +1,6 @@
-import { SearchBarProps, User, Round } from "src/types";
+import { SearchBarProps, User, Round } from "@/types";
 
-import "src/styles/searchBar.css";
+import "@/styles/searchBar.css";
 
 const SearchBar = ({ users, setUsers, rounds, setRounds, type }:SearchBarProps) => {
     
@@ -15,7 +15,7 @@ const SearchBar = ({ users, setUsers, rounds, setRounds, type }:SearchBarProps) 
 
     return (
         <div className="searchBox gradient-border">
-            <img src="src/public/search.svg" />
+            <img src="/src/public/search.svg" />
             <input type="text" className="search" onInput={onInput} />
         </div>
     );
