@@ -1,36 +1,35 @@
 @import "./app.css";
 
-.searchBox, .loginBox {
-    height: 40px;
-    width: 40%;
-    margin: 40px auto;
-    padding: 10px;
-    background: var(--black);
-    border-radius: 10px;
-    display: flex;
-    gap: 10px;
+.searchBox,
+.loginBox {
+  height: 40px;
+  width: 40%;
+  margin: 40px auto;
+  padding: 10px;
+  background: var(--black);
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .searchBox img {
-    height: 100%;
-    filter: invert(100%);
+  height: 100%;
+  filter: invert(100%);
 }
 
-.search, .login {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    background: none;
-    font-weight: bold;
-    font-size: 30px;
+.search,
+.login {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: none;
+  font-weight: bold;
+  font-size: 30px;
 }
 
-  
 @media (max-width: 1000px) {
-     
-    .searchBox {
-        width: 90%;
-        margin-top: 5px;
-    }
-} 
-  
+  .searchBox {
+    width: 90%;
+    margin-top: 5px;
+  }
+}
