@@ -18,7 +18,7 @@ const Home = () => {
       setInitialData(getUsers.data);
     }
   }, [getUsers]);
-  
+
   useEffect(() => {
     setSearchedData(initialData);
   }, [initialData]);
@@ -30,10 +30,11 @@ const Home = () => {
         <h1>AbaSjakk</h1>
       </div>
       <SearchBar type="USER" users={initialData} setUsers={setSearchedData} />
-      {getUsers.isLoading || getUsers.isError ? 
-        <StatusMessage query={getUsers} /> :
+      {getUsers.isLoading || getUsers.isError ? (
+        <StatusMessage query={getUsers} />
+      ) : (
         <Leaderboard data={searchedData} initialData={initialData} />
-      }
+      )}
 
       <div className="fade" />
     </>
