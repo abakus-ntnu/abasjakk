@@ -1,121 +1,141 @@
 .leaderboard {
-    font-size: 3rem;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 60%;
-    margin: 0 auto;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .leaderboardHeaders {
-    width: 100% !important;
-    display: flex;
-    flex-direction: row;
-    background-color: none;
-    text-align: center;
-    font-size: 2rem;
+  width: 100% !important;
+  display: flex;
+  flex-direction: row;
+  background-color: none;
+  text-align: center;
+  font-size: 2rem;
 }
 
 .leaderboardHeaders div:nth-child(1) {
-    width: 20%;
+  width: 20%;
 }
 
 .leaderboardHeaders div:nth-child(2) {
-    width: 60%;
-    text-align: left;
+  width: 60%;
+  text-align: left;
 }
 
 .leaderboardHeaders div:nth-child(3) {
-    width: 20%;
+  width: 20%;
 }
 
 .leaderboard .first {
-    transform: skewX(var(--skewValue)) scaleY(1.1);
-    margin-bottom: .2rem;
+  transform: skewX(var(--skewValue)) scaleY(1.1);
+  margin-bottom: 0.2rem;
 }
 
 .leaderboard .first:after {
-    background: linear-gradient(60deg, #A38A00, #D1B000, #FFD700, #D1B000, #A38A00, #D1B000, #FFD700, #D1B000, #A38A00);
-    background-size: 300% 300%;
-    animation: animatedgold 4s ease alternate infinite;
+  background: linear-gradient(
+    60deg,
+    #a38a00,
+    #d1b000,
+    #ffd700,
+    #d1b000,
+    #a38a00,
+    #d1b000,
+    #ffd700,
+    #d1b000,
+    #a38a00
+  );
+  background-size: 300% 300%;
+  animation: animatedgold 4s ease alternate infinite;
 }
 
 @keyframes animatedgold {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
-  
 .scoreBox {
-    --skewValue: -20deg;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 5rem;
-    background-color: none;
-    border-radius: 10px;
-    text-align: center;
-    transform: skewX(var(--skewValue));
-    /* overflow: hidden; */
-    /* font-size: 2rem; */
+  --skewValue: -20deg;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
+  background-color: none;
+  border-radius: 10px;
+  text-align: center;
+  transform: skewX(var(--skewValue));
+  /* overflow: hidden; */
+  /* font-size: 2rem; */
 }
 
 .position {
-    height: 100%;
-    width: 20%;
-    background-color: none;
+  height: 100%;
+  width: 20%;
+  background-color: none;
 }
 
 .name {
-    height: 100%;
-    width: 60%;
-    background-color: none;
-    text-align: left;
-    overflow: hidden;
-    /* transform: skewX(var(--skewValue)); */
-    /* animation: changeBackgroundColor 5s linear infinite alternate; */
+  height: 100%;
+  width: 60%;
+  background-color: none;
+  text-align: left;
+  overflow: hidden;
+  /* transform: skewX(var(--skewValue)); */
+  /* animation: changeBackgroundColor 5s linear infinite alternate; */
 }
 
 .scoreNumber {
-    height: 100%;
-    width: 20%;
-    background-color: none;
-    /* border-radius: 10px; */
-    /* transform: skewX(calc(-1 * var(--skewValue))); */
-}   
-
-
-
-
-
-@keyframes changeBackgroundColor {
-    0% { background-color: rgb(165, 50, 71) }
-    12.5% { background-color: rgb(152, 8, 145) }
-    25% { background-color: rgb(10, 95, 171) }
-    37.5% { background-color: rgb(8, 142, 152) }
-    50% { background-color: rgb(18, 138, 32) }
-    62.5% { background-color: rgb(157, 174, 2) }
-    75% { background-color: rgb(199, 122, 7) }
-    100% { background-color: rgb(165, 50, 71) }
+  height: 100%;
+  width: 20%;
+  background-color: none;
+  /* border-radius: 10px; */
+  /* transform: skewX(calc(-1 * var(--skewValue))); */
 }
 
-
+@keyframes changeBackgroundColor {
+  0% {
+    background-color: rgb(165, 50, 71);
+  }
+  12.5% {
+    background-color: rgb(152, 8, 145);
+  }
+  25% {
+    background-color: rgb(10, 95, 171);
+  }
+  37.5% {
+    background-color: rgb(8, 142, 152);
+  }
+  50% {
+    background-color: rgb(18, 138, 32);
+  }
+  62.5% {
+    background-color: rgb(157, 174, 2);
+  }
+  75% {
+    background-color: rgb(199, 122, 7);
+  }
+  100% {
+    background-color: rgb(165, 50, 71);
+  }
+}
 
 @media (max-width: 1000px) {
-    .leaderboard {
-        width: 90%;
-        font-size: 2rem;
-    }
+  .leaderboard {
+    width: 90%;
+    font-size: 2rem;
+  }
 
-    .scoreBox {
-        height: 3rem;
-    }
+  .scoreBox {
+    height: 3rem;
+  }
 }

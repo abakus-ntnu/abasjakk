@@ -8,50 +8,58 @@ import StatusMessage from "@/components/statusMessage";
 import "@/styles/matches.css";
 
 const Matches = () => {
-    const [initialData, setInitialData] = useState([]);
-    const [searchedData, setSearchedData] = useState([]);
+  const [initialData, setInitialData] = useState([]);
+  const [searchedData, setSearchedData] = useState([]);
 
-    const getRounds = GetRounds();
+  const getRounds = GetRounds();
 
-    useEffect(() => {
-        if (getRounds.isFetched) {
-            // console.log(getRounds.data[0].matches);
-            setInitialData(getRounds.data);
-        }
-    }, [getRounds]);
+  useEffect(() => {
+    if (getRounds.isFetched) {
+      // console.log(getRounds.data[0].matches);
+      setInitialData(getRounds.data);
+    }
+  }, [getRounds]);
 
-    useEffect(() => {
-        setSearchedData(initialData);
-    }, [initialData])
+  useEffect(() => {
+    setSearchedData(initialData);
+  }, [initialData]);
 
-    return (
-        <>
-            <div className="titleBox">
-                <h1>Kommende kamper</h1>
-            </div>
-            <SearchBar type="ROUND" rounds={initialData} setRounds={setSearchedData}  />
+  return (
+    <>
+      <div className="titleBox">
+        <h1>Kommende kamper</h1>
+      </div>
+      <SearchBar
+        type="ROUND"
+        rounds={initialData}
+        setRounds={setSearchedData}
+      />
 
-            <div className="matchesBox">
-                {getRounds.isLoading || getRounds.isError || searchedData.length === 0 ? 
-                <StatusMessage query={getRounds} /> :
-                <MatchesTable data={searchedData[searchedData.length - 1]} roundNr={initialData[initialData.length - 1].order} />
-                }
-            </div>
-           
+      <div className="matchesBox">
+        {getRounds.isLoading ||
+        getRounds.isError ||
+        searchedData.length === 0 ? (
+          <StatusMessage query={getRounds} />
+        ) : (
+          <MatchesTable
+            data={searchedData[searchedData.length - 1]}
+            roundNr={initialData[initialData.length - 1].order}
+          />
+        )}
+      </div>
 
-            <br />
-            <br />
-            <br />
-            
-            {/* <div className="footer">
+      <br />
+      <br />
+      <br />
+
+      {/* <div className="footer">
                 <a href="https://github.com/Abakus-ntnu">
                 <img src="/src/public/github.svg" className="github" />
                 </a>
             </div> */}
-            <div className="fade" />
-        </>
-    );
-}
-
+      <div className="fade" />
+    </>
+  );
+};
 
 export default Matches;

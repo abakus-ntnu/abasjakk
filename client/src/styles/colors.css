@@ -1,10 +1,10 @@
 :root {
-    --black: #1F2421;
-    --dark-grey: #222;
-    --grey: #333;
-    --white: #fff;
-    --neon-blue: rgba(99,195,231,1);
-    --neon-red: rgba(236,19,65,1);
-    --neon-green: rgba(86, 212, 69,1);
-    --neon-purple: rgba(204, 102, 255,1);
+  --black: #1f2421;
+  --dark-grey: #222;
+  --grey: #333;
+  --white: #fff;
+  --neon-blue: rgba(99, 195, 231, 1);
+  --neon-red: rgba(236, 19, 65, 1);
+  --neon-green: rgba(86, 212, 69, 1);
+  --neon-purple: rgba(204, 102, 255, 1);
 }

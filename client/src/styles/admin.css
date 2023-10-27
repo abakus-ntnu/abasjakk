@@ -1,211 +1,232 @@
 @import "./app.css";
 
 .adminContent {
-    width: 90%;
-    margin: 0 auto;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    gap: 4rem;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  gap: 4rem;
 }
 
 .adminTitle {
-    font-size: 5rem;
+  font-size: 5rem;
 }
 
 .adminControls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: 0 auto 4rem;
-    gap: 3rem;
-    flex-wrap: wrap;
-    font-size: 2rem;
-    font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto 4rem;
+  gap: 3rem;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .adminControls * {
-    margin: auto;
+  margin: auto;
 }
 
-.adminControls .searchBox, .createUserBox, .numberOfTablesBox, input[type=button], .loginBtn input {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    height: 2rem;
-    flex-grow: 1; 
-    transition: .3s;
+.adminControls .searchBox,
+.createUserBox,
+.numberOfTablesBox,
+input[type="button"],
+.loginBtn input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 2rem;
+  flex-grow: 1;
+  transition: 0.3s;
 }
 
-.adminControls .searchBox, .createUserBox {
-    width: 25%;
+.adminControls .searchBox,
+.createUserBox {
+  width: 25%;
 }
 
 .createUserBox input {
-    width: 100%;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: left;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: left;
 }
 
 .createUserIcon {
-    filter: invert(100%); 
-    transition: .3s;
-    cursor: pointer;
-    transform: scale(1.4);
-    margin: 0 10px;
+  filter: invert(100%);
+  transition: 0.3s;
+  cursor: pointer;
+  transform: scale(1.4);
+  margin: 0 10px;
 }
 
 .createUserIcon:hover {
-    filter: invert(100%) drop-shadow(0px 0px 2px #222);
-    transform: scale(1.6);
+  filter: invert(100%) drop-shadow(0px 0px 2px #222);
+  transform: scale(1.6);
 }
 
 .numberOfTablesBox {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .numberOfTablesBox h3 {
-    height: 2rem;
-    font-size: 1.5rem;
-    font-weight: normal;
+  height: 2rem;
+  font-size: 1.5rem;
+  font-weight: normal;
 }
 
 .numberOfTablesBox input {
-    text-align: center;
-    height: 2rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    width: 3rem;
-    margin-bottom: 15px;
+  text-align: center;
+  height: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  width: 3rem;
+  margin-bottom: 15px;
 }
 
-.adminControls input[type=button], .loginBtn input {
-    height: 3.438rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    border-radius: calc(var(--borderWidth) + 5px);
-    background-color: var(--black);
+.adminControls input[type="button"],
+.loginBtn input {
+  height: 3.438rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: calc(var(--borderWidth) + 5px);
+  background-color: var(--black);
 }
 
-.adminControls input[type=button]:hover, .loginBtn input:hover {
-    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-    background-size: 300% 300%;
-    animation: animatedgradient 3s ease alternate infinite;
-    transform: scale(1.15);
-    cursor: pointer;
+.adminControls input[type="button"]:hover,
+.loginBtn input:hover {
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
+  background-size: 300% 300%;
+  animation: animatedgradient 3s ease alternate infinite;
+  transform: scale(1.15);
+  cursor: pointer;
 }
 
-.adminControls .generateRoundBox.gradient-border:hover:after, .loginBtn input:hover:after {
-    transform: scaleX(.9) scaleY(.1);
-    cursor: pointer;
+.adminControls .generateRoundBox.gradient-border:hover:after,
+.loginBtn input:hover:after {
+  transform: scaleX(0.9) scaleY(0.1);
+  cursor: pointer;
 }
 
 .loginBtn {
-    width: 20rem;
-    height: 110%;
-    margin: 0 auto;
-    overflow: visible;
+  width: 20rem;
+  height: 110%;
+  margin: 0 auto;
+  overflow: visible;
 }
 
 .loginBtn input {
-    width: 100%;
-    height: 80%;
+  width: 100%;
+  height: 80%;
 }
 
-
 h2 {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .adminMatches {
-    flex: 1;
+  flex: 1;
 }
 
 .adminLeaderboard {
-    border-collapse: collapse;
-    font-size: 1.5rem;
-    text-align: center;
-    align-items: center;
-    width: 100%;
-    flex: 1;
+  border-collapse: collapse;
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  flex: 1;
 }
 
-.adminLeaderboard caption, .adminMatches caption {
-    font-size: 1.5rem;
+.adminLeaderboard caption,
+.adminMatches caption {
+  font-size: 1.5rem;
 }
 
 .deleted {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
-.inputName, .inputScore {
-    width: 100%;
-    font-size: 20px;
-    text-align: center;
+.inputName,
+.inputScore {
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
 }
 
 .inputName {
-    text-align: left;
+  text-align: left;
 }
 
 .nameHeader {
-    text-align: left;
+  text-align: left;
 }
 
 .imageBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .x {
-    height: 100%;
-    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%);
-    cursor: pointer;
-    transition: 0.2s;
+  height: 100%;
+  filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg)
+    brightness(84%) contrast(87%);
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .x:hover {
-    filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg) brightness(84%) contrast(87%) drop-shadow(2px 2px 4px #222);
-    transform: scale(1.1);
+  filter: invert(33%) sepia(25%) saturate(6453%) hue-rotate(343deg)
+    brightness(84%) contrast(87%) drop-shadow(2px 2px 4px #222);
+  transform: scale(1.1);
 }
 
 .save {
-    height: 100%;
-    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%);
-    cursor: pointer;
-    transition: 0.2s;
+  height: 100%;
+  filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%)
+    hue-rotate(72deg) brightness(105%) contrast(86%);
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .save:hover {
-    filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%) hue-rotate(72deg) brightness(105%) contrast(86%) drop-shadow(2px 2px 4px #222);
-    transform: scale(1.1);
+  filter: brightness(0) saturate(100%) invert(47%) sepia(93%) saturate(679%)
+    hue-rotate(72deg) brightness(105%) contrast(86%)
+    drop-shadow(2px 2px 4px #222);
+  transform: scale(1.1);
 }
 
-
-
-
 select {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .adminMatches .matchList {
-    width: 100%;
-} 
+  width: 100%;
+}
 
 /* .adminMatches .playerheader {
     width: 15%;
 } */
 
 .adminMatches .vsHeader {
-    width: 10% !important;
+  width: 10% !important;
 }
 
 /* .adminMatches .tableColum {
@@ -213,5 +234,5 @@ select {
 } */
 
 .adminMatches .resultColumn {
-    width: 20%;
+  width: 20%;
 }
