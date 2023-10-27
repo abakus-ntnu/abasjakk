@@ -143,6 +143,14 @@ h2 {
   flex: 1;
 }
 
+.historyMatches td {
+  color: grey;
+}
+
+.historyTitle {
+  border-bottom: 2px solid rgb(59, 0, 177);
+}
+
 .adminLeaderboard {
   border-collapse: collapse;
   font-size: 1.5rem;

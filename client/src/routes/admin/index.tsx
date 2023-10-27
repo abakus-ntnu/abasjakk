@@ -104,7 +104,7 @@ const Admin = () => {
             value={createUserInputValue}
           />
           <img
-            src="@/public/new-user.svg"
+            src="src/public/new-user.svg"
             className="createUserIcon"
             onClick={() => submit()}
           />
@@ -151,8 +151,8 @@ const Admin = () => {
               getUsers={getUsers}
             />
           )}
-          <div>
-            <h2>Historikk</h2>
+          <div className="historyMatches">
+            <h2 className="historyTitle">Historikk</h2>
             {getRounds.isLoading ||
             getRounds.isFetching ||
             getRounds.isError ||

@@ -34,6 +34,10 @@ main {
   padding: 2rem;
 }
 
+input {
+  color: white;
+}
+
 .fade {
   position: fixed;
   z-index: 1;
