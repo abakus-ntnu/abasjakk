@@ -6,7 +6,6 @@ import (
 	"github.com/abakus-ntnu/abasjakk/api/db"
 	"github.com/abakus-ntnu/abasjakk/api/models"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -24,9 +23,7 @@ func HandleGetUser(c *gin.Context) {
 		return
 	}
 
-	filter := bson.M{"_id": objectId}
-
-	user, err := db.FindOne[models.User]("user", filter)
+	user, err := db.FindById[models.User]("user", objectId)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
 		return
