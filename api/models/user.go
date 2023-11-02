@@ -1,7 +1,10 @@
 package models
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type User struct {
-	Name      string `json:"name"`
-	Score     int    `json:"score"`
-	IsDeleted bool   `json:"isDeleted"`
+	Id        primitive.ObjectID `json:"id" bson:"_id"`
+	Name      string             `json:"name" bson:"name"`
+	Score     int                `json:"score" bson:"score"`
+	IsDeleted bool               `json:"isDeleted" bson:"isDeleted"`
 }

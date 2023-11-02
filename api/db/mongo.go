@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -31,7 +32,23 @@ func GetCollection(collection string) *mongo.Collection {
 	return mongoClient.Database("abasjakk").Collection(collection)
 }
 
-func GetAllInCollection[T interface{}](collection string) []T {
+func FindById[T interface{}](collection string, id primitive.ObjectID) (T, error) {
+	filter := bson.M{"_id": id}
+
+	var result T
+	err := GetCollection(collection).FindOne(context.Background(), filter).Decode(&result)
+
+	return result, err
+}
+
+func FindOne[T interface{}](collection string, filter interface{}) (T, error) {
+	var result T
+	err := GetCollection(collection).FindOne(context.Background(), filter).Decode(&result)
+
+	return result, err
+}
+
+func FindAll[T interface{}](collection string) []T {
 	cursor, err := GetCollection(collection).Find(context.Background(), bson.D{})
 	if err != nil {
 		panic(err)
@@ -43,4 +60,25 @@ func GetAllInCollection[T interface{}](collection string) []T {
 	}
 
 	return results
+}
+
+func InsertOne[T interface{}](collection string, document T) primitive.ObjectID {
+	result, err := GetCollection(collection).InsertOne(context.Background(), document)
+	if err != nil {
+		panic(err)
+	}
+
+	return result.InsertedID.(primitive.ObjectID)
+}
+
+func UpdateById[T interface{}](collection string, id primitive.ObjectID, document T) error {
+	_, err := GetCollection(collection).UpdateByID(context.Background(), id, bson.D{{"$set", document}})
+	return err
+}
+
+func DeleteById(collection string, id primitive.ObjectID) error {
+	filter := bson.M{"_id": id}
+
+	_, err := GetCollection(collection).DeleteOne(context.Background(), filter)
+	return err
 }

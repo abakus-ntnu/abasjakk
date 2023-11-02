@@ -11,6 +11,10 @@ func main() {
 	defer db.CloseMongoDB()
 
 	router := gin.Default()
-	router.GET("/users", handlers.HandleGetUsers)
+	router.GET("/user", handlers.HandleGetUsers)
+	router.POST("/user", handlers.HandleCreateUser)
+	router.GET("/user/:id", handlers.HandleGetUser)
+	router.PUT("/user/:id", handlers.HandleUpdateUser)
+	router.DELETE("/user/:id", handlers.HandleDeleteUser)
 	router.Run()
 }
