@@ -16,8 +16,8 @@ func main() {
 	router.GET("/user/:id", handlers.HandleGetUser)
 	router.PUT("/user/:id", handlers.HandleUpdateUser)
 	router.DELETE("/user/:id", handlers.HandleDeleteUser)
-	router.GET("/round", handlers.HandleGetRounds)
-	router.GET("/round/:id", handlers.HandleGetRound)
-	router.PUT("/round/:id", handlers.HandleUpdateRound)
+	router.GET("/match", handlers.HandleGetMatches)
+	router.GET("/match/:id", handlers.HandleGetMatch)
+	router.PUT("/match/:id", handlers.HandleUpdateMatch)
 	router.Run()
 }
