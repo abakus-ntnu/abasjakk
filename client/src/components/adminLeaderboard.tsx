@@ -12,6 +12,7 @@ interface Props {
 
 const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
   const [users, setUsers] = useState(data);
+  const [changeId, setChangeId] = useState([]);
 
   useEffect(() => {
     data.sort((a, b) => b.score - a.score);
@@ -36,6 +37,7 @@ const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
   const findUserById = (id: string) => users.find((user) => user._id === id);
 
   const handleChange = (id: string, event: any, changeName = false) => {
+    setChangeId([...changeId, id]);
     const arr = [...users];
     const user = arr.find((user) => user._id === id);
     if (changeName) {
@@ -78,13 +80,16 @@ const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
               />
             </td>
             <td className="imageBox">
+            {changeId.includes(user._id) && (
               <img
                 src="src/public/save.svg"
                 className="save"
-                onClick={() =>
+                onClick={() => {
+                  setChangeId([]);
                   updateUserMutation.mutate(findUserById(user._id))
-                }
+                }}
               />
+             )}
               <img
                 src="src/public/x.svg"
                 className="x"
