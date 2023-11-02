@@ -1,14 +1,16 @@
-import { SearchBarProps, User, Round } from "@/types";
-
+import { StateUpdater } from "preact/hooks";
+import { User, Round } from "@/types";
 import "@/styles/searchBar.css";
 
-const SearchBar = ({
-  users,
-  setUsers,
-  rounds,
-  setRounds,
-  type,
-}: SearchBarProps) => {
+interface Props {
+  type: "USER" | "ROUND" | "BOTH";
+  users?: User[];
+  rounds?: Round[];
+  setUsers?: StateUpdater<User[]>;
+  setRounds?: StateUpdater<Round[]>;
+}
+
+const SearchBar = ({ users, setUsers, rounds, setRounds, type }: Props) => {
   const onInput = (event) => {
     const search = event.target.value.toString().trim().toLowerCase();
 

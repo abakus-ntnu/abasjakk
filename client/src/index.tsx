@@ -2,13 +2,13 @@ import { render } from "preact";
 import { useRef } from "preact/hooks";
 import { Route, Router, route } from "preact-router";
 import { Link } from "preact-router/match";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoute from "./components/protectedRoute";
-import Home from "./routes/home";
-import Admin from "./routes/admin";
-import Matches from "./routes/matches";
 import Laser from "./components/laser";
-
+import Matches from "./routes/matches";
+import Admin from "./routes/admin";
+import Home from "./routes/home";
 import "./styles/app.css";
 
 const queryClient = new QueryClient();
@@ -23,7 +23,7 @@ function App() {
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <main>
         <nav ref={nav}>
           <Link
@@ -54,8 +54,14 @@ function App() {
         </Router>
       </main>
       <Laser />
-    </QueryClientProvider>
+    </>
   );
 }
 
-render(<App />, document.getElementById("root"));
+render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+    <ReactQueryDevtools />
+  </QueryClientProvider>,
+  document.getElementById("root"),
+);

@@ -1,14 +1,16 @@
 import { useEffect, useState } from "preact/hooks";
-import { DeleteUser, SoftDeleteUser, UpdateUser } from "@/api/user";
-import { LeaderboardProps } from "@/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteUser, softDeleteUser, updateUser } from "@/api/user";
+import { User } from "@/types";
 import "@/styles/leaderboard.css";
 
-const AdminLeaderboard = ({
-  data,
-  initialData,
-  getUsersQuery,
-  hasStarted,
-}: LeaderboardProps) => {
+interface Props {
+  data: User[];
+  initialData: User[];
+  hasStarted?: boolean;
+}
+
+const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
   const [users, setUsers] = useState(data);
 
   useEffect(() => {
@@ -16,30 +18,22 @@ const AdminLeaderboard = ({
     setUsers(data);
   }, [data]);
 
-  const deleteUser = DeleteUser();
-  const softDeleteUser = SoftDeleteUser();
-  const updateUser = UpdateUser();
-  const Delete = (id: string) =>
-    deleteUser.mutate(
-      users.find((user) => user._id === id),
-      {
-        onSuccess: () => getUsersQuery.refetch(),
-      },
-    );
-  const SoftDelete = (id: string) =>
-    softDeleteUser.mutate(
-      users.find((user) => user._id === id),
-      {
-        onSuccess: () => getUsersQuery.refetch(),
-      },
-    );
-  const Update = (id: string) =>
-    updateUser.mutate(
-      users.find((user) => user._id === id),
-      {
-        onSuccess: () => getUsersQuery.refetch(),
-      },
-    );
+  const queryClient = useQueryClient();
+
+  const deleteUserMutation = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
+  const softDeleteUserMutation = useMutation({
+    mutationFn: softDeleteUser,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
+  const updateUserMutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
+
+  const findUserById = (id: string) => users.find((user) => user._id === id);
 
   const handleChange = (id: string, event: any, changeName = false) => {
     const arr = [...users];
@@ -87,13 +81,17 @@ const AdminLeaderboard = ({
               <img
                 src="src/public/save.svg"
                 className="save"
-                onClick={() => Update(user._id)}
+                onClick={() =>
+                  updateUserMutation.mutate(findUserById(user._id))
+                }
               />
               <img
                 src="src/public/x.svg"
                 className="x"
                 onClick={() =>
-                  hasStarted ? SoftDelete(user._id) : Delete(user._id)
+                  hasStarted
+                    ? softDeleteUserMutation.mutate(findUserById(user._id))
+                    : deleteUserMutation.mutate(findUserById(user._id))
                 }
               />
             </td>

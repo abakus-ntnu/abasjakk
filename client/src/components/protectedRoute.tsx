@@ -1,22 +1,36 @@
-import { Route } from "preact-router";
 import { useEffect, useState } from "preact/hooks";
-import { CheckPassword } from "@/api/login";
-import { ProtectedRouteProps } from "@/types";
+import { JSXInternal } from "preact/src/jsx";
+import { Route } from "preact-router";
+import { useMutation } from "@tanstack/react-query";
+import { checkPassword } from "@/api/login";
 import Login from "@/routes/login";
 
-const ProtectedRoute = ({ path, component }: ProtectedRouteProps) => {
+type Props = {
+  path: string;
+  component: () => JSXInternal.Element;
+};
+
+const ProtectedRoute = ({ path, component }: Props) => {
   const [isAuth, setAuth] = useState(false);
-  const checkPassword = CheckPassword();
+  const checkPasswordMutation = useMutation({
+    mutationFn: checkPassword,
+  });
+
+  // only want to call this once when ProtectedRoute is mounted
+  useEffect(() => {
+    checkPasswordMutation.mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    if (checkPassword.isFetched) {
-      setAuth(checkPassword.data === 200);
-    }
-  }, [checkPassword]);
+    setAuth(checkPasswordMutation.data === 200);
+  }, [checkPasswordMutation]);
 
-  if (!isAuth) return <Route component={Login} />;
-
-  return <Route path={path} component={component} />;
+  return isAuth ? (
+    <Route path={path} component={component} />
+  ) : (
+    <Route component={Login} />
+  );
 };
 
 export default ProtectedRoute;
