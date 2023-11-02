@@ -10,6 +10,7 @@ const AdminLeaderboard = ({
   hasStarted,
 }: LeaderboardProps) => {
   const [users, setUsers] = useState(data);
+  const [changeId, setChangeId] = useState([]);
 
   useEffect(() => {
     data.sort((a, b) => b.score - a.score);
@@ -19,6 +20,7 @@ const AdminLeaderboard = ({
   const deleteUser = DeleteUser();
   const softDeleteUser = SoftDeleteUser();
   const updateUser = UpdateUser();
+
   const Delete = (id: string) =>
     deleteUser.mutate(
       users.find((user) => user._id === id),
@@ -33,15 +35,18 @@ const AdminLeaderboard = ({
         onSuccess: () => getUsersQuery.refetch(),
       },
     );
-  const Update = (id: string) =>
+  const Update = (id: string) => {
+    setChangeId([]);
     updateUser.mutate(
       users.find((user) => user._id === id),
       {
         onSuccess: () => getUsersQuery.refetch(),
       },
     );
+  };
 
   const handleChange = (id: string, event: any, changeName = false) => {
+    setChangeId([...changeId, id]);
     const arr = [...users];
     const user = arr.find((user) => user._id === id);
     if (changeName) {
@@ -84,11 +89,14 @@ const AdminLeaderboard = ({
               />
             </td>
             <td className="imageBox">
-              <img
-                src="src/public/save.svg"
-                className="save"
-                onClick={() => Update(user._id)}
-              />
+              {changeId.includes(user._id) && (
+                <img
+                  src="src/public/save.svg"
+                  className="save"
+                  onClick={() => Update(user._id)}
+                />
+              )}
+
               <img
                 src="src/public/x.svg"
                 className="x"
