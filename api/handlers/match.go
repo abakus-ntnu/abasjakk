@@ -66,6 +66,8 @@ func HandleUpdateMatch(c *gin.Context) {
 		return
 	}
 
+	utils.UpdateScores(match, updatedMatch.Result)
+
 	match.Result = updatedMatch.Result
 
 	err = db.UpdateById[models.Match]("match", objectId, match)
