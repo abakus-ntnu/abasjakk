@@ -52,9 +52,9 @@ func HandleCreateUser(c *gin.Context) {
 }
 
 type UserUpdateRequest struct {
-	Name      *string `bson:"name"`
-	Score     *int    `bson:"score"`
-	IsDeleted *bool   `bson:"isDeleted"`
+	Name      *string     `bson:"name"`
+	Score     *float64    `bson:"score"`
+	IsDeleted *bool       `bson:"isDeleted"`
 }
 
 func HandleUpdateUser(c *gin.Context) {
