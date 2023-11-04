@@ -1,11 +1,6 @@
 import { render } from "preact";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Laser from "./components/laser";
-import Matches from "./routes/matches";
-import Admin from "./routes/admin";
-import Home from "./routes/home";
-import "./styles/app.css";
 import {
   BrowserRouter,
   NavLink,
@@ -13,7 +8,12 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import Laser from "./components/laser";
+import Matches from "./routes/matches";
 import Login from "./routes/login";
+import Admin from "./routes/admin";
+import Home from "./routes/home";
+import "./styles/app.css";
 
 const queryClient = new QueryClient();
 

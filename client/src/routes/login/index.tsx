@@ -1,11 +1,11 @@
 import { useEffect, useState } from "preact/hooks";
-import "@/styles/app.css";
-import "@/styles/searchBar.css";
-import "@/styles/admin.css";
 import { signal } from "@preact/signals";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { checkPassword } from "@/api/login";
+import "@/styles/app.css";
+import "@/styles/searchBar.css";
+import "@/styles/admin.css";
 
 export const isLoggedIn = signal(false);
 
