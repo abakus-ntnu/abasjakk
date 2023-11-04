@@ -1,7 +1,9 @@
 import { useEffect, useState } from "preact/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Navigate } from "react-router-dom";
 import { getRounds, createRound } from "@/api/round";
 import { getUsers, createUser } from "@/api/user";
+import { isLoggedIn } from "../login";
 import AdminLeaderboard from "@/components/adminLeaderboard";
 import StatusMessage from "@/components/statusMessage";
 import MatchesTable from "@/components/matchesTable";
@@ -74,6 +76,10 @@ const Admin = () => {
     );
     setCreateUserInputValue("");
   };
+
+  if (!isLoggedIn.value) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
