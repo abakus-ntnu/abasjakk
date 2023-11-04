@@ -1,61 +1,56 @@
 import { render } from "preact";
-import { useRef } from "preact/hooks";
-import { Route, Router, route } from "preact-router";
-import { Link } from "preact-router/match";
-import { QueryClient, QueryClientProvider } from "react-query";
-import ProtectedRoute from "./components/protectedRoute";
-import Home from "./routes/home";
-import Admin from "./routes/admin";
-import Matches from "./routes/matches";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import {
+  BrowserRouter,
+  NavLink,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Laser from "./components/laser";
-
+import Matches from "./routes/matches";
+import Login from "./routes/login";
+import Admin from "./routes/admin";
+import Home from "./routes/home";
 import "./styles/app.css";
 
 const queryClient = new QueryClient();
 
 function App() {
-  // stupid <Link> does not work properly (probably gotta sell my soul to the devil to find out why)
-  // so I have to do all this..
-  const nav = useRef(null);
-  const switchClass = (event) => {
-    for (const link of nav.current.children) link.className = null;
-    event.target.className = "active-link";
-  };
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <main>
-        <nav ref={nav}>
-          <Link
-            href={"/"}
-            activeClassName="active-link"
-            onClick={(e) => {
-              route("/");
-              switchClass(e);
-            }}
-          >
-            HJEM
-          </Link>
-          <Link
-            href={"/matches"}
-            activeClassName="active-link"
-            onClick={(e) => {
-              route("/matches");
-              switchClass(e);
-            }}
-          >
-            KAMPER
-          </Link>
-        </nav>
-        <Router>
-          <Route path="/" component={Home} default />
-          <Route path="/matches" component={Matches} />
-          <ProtectedRoute path="/admin" component={Admin} />
-        </Router>
-      </main>
-      <Laser />
-    </QueryClientProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="matches" element={<Matches />} />
+          <Route path="login" element={<Login />} />
+          <Route path="admin" element={<Admin />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-render(<App />, document.getElementById("root"));
+function Layout() {
+  return (
+    <>
+      <main>
+        <nav>
+          <NavLink to={"/"}>HJEM</NavLink>
+          <NavLink to={"/matches"}>KAMPER</NavLink>
+        </nav>
+        <Outlet />
+      </main>
+      <Laser />
+    </>
+  );
+}
+
+render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+    <ReactQueryDevtools />
+  </QueryClientProvider>,
+  document.getElementById("root"),
+);

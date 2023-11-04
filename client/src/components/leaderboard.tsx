@@ -12,12 +12,6 @@ type LeaderboardProps = {
   }>;
 };
 
-type ScoreProps = {
-  name: string;
-  score: number;
-  pos: number;
-};
-
 const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
   data.sort((a, b) => b.score - a.score);
 
@@ -27,7 +21,7 @@ const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
                 <div>Plass</div>
                 <div>Navn</div>
                 <div>Poeng</div>
-            </div> */}
+              </div> */}
       {data.map((score) => (
         <Score
           key={score.name}
@@ -40,6 +34,12 @@ const Leaderboard = ({ data, initialData }: LeaderboardProps) => {
       <br />
     </div>
   );
+};
+
+type ScoreProps = {
+  name: string;
+  score: number;
+  pos: number;
 };
 
 const Score = ({ name, score, pos }: ScoreProps) => {
