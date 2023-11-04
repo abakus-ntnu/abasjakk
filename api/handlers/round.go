@@ -69,7 +69,16 @@ func HandleDeleteRound(c *gin.Context) {
 		return
 	}
 
-	// TODO delete all corresponding matches
+	var round models.Round
+	round, err = db.FindById[models.Round]("round", objectId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "round not found"})
+		return
+	}
+
+	for _, matchId := range round.Matches {
+		db.DeleteById("match", matchId)
+	}
 
 	err = db.DeleteById("round", objectId)
 	if err != nil {
