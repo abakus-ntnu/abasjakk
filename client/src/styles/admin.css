@@ -135,6 +135,12 @@ input[type="button"],
   height: 80%;
 }
 
+.wrong-password {
+  text-align: center;
+  color: red;
+  transition: .25s ease;
+}
+
 h2 {
   font-size: 30px;
 }

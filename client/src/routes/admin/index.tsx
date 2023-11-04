@@ -8,6 +8,9 @@ import MatchesTable from "@/components/matchesTable";
 import SearchBar from "@/components/searchBar";
 import "@/styles/app.css";
 import "@/styles/admin.css";
+import { isLoggedIn } from "../login";
+import { Navigate } from "react-router-dom";
+import { effect } from "@preact/signals";
 
 const Admin = () => {
   const [createUserInputValue, setCreateUserInputValue] = useState("");
@@ -74,6 +77,14 @@ const Admin = () => {
     );
     setCreateUserInputValue("");
   };
+
+  effect(() => {
+    console.log(isLoggedIn.value);
+  });
+
+  if (!isLoggedIn.value) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>
