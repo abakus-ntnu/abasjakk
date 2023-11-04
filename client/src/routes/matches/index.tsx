@@ -1,24 +1,25 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetRounds } from "@/api/round";
-import Laser from "@/components/laser";
+import { useQuery } from "@tanstack/react-query";
+import { getRounds } from "@/api/round";
+import StatusMessage from "@/components/statusMessage";
 import MatchesTable from "@/components/matchesTable";
 import SearchBar from "@/components/searchBar";
-import StatusMessage from "@/components/statusMessage";
-
 import "@/styles/matches.css";
 
 const Matches = () => {
   const [initialData, setInitialData] = useState([]);
   const [searchedData, setSearchedData] = useState([]);
 
-  const getRounds = GetRounds();
+  const getRoundsQuery = useQuery({
+    queryKey: ["rounds"],
+    queryFn: getRounds,
+  });
 
   useEffect(() => {
-    if (getRounds.isFetched) {
-      // console.log(getRounds.data[0].matches);
-      setInitialData(getRounds.data);
+    if (getRoundsQuery.isFetched) {
+      setInitialData(getRoundsQuery.data);
     }
-  }, [getRounds]);
+  }, [getRoundsQuery]);
 
   useEffect(() => {
     setSearchedData(initialData);
@@ -36,10 +37,10 @@ const Matches = () => {
       />
 
       <div className="matchesBox">
-        {getRounds.isLoading ||
-        getRounds.isError ||
+        {getRoundsQuery.isLoading ||
+        getRoundsQuery.isError ||
         searchedData.length === 0 ? (
-          <StatusMessage query={getRounds} />
+          <StatusMessage query={getRoundsQuery} />
         ) : (
           <MatchesTable
             data={searchedData[searchedData.length - 1]}

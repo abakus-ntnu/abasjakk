@@ -1,5 +1,4 @@
 import { useState } from "preact/hooks";
-
 import "@/styles/app.css";
 import "@/styles/searchBar.css";
 import "@/styles/admin.css";

@@ -1,18 +1,16 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetUsers, CreateUser } from "@/api/user";
-import { GetRounds, CreateRound } from "@/api/round";
-import { GetTableCount, SetTableCount } from "@/api/settings";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getRounds, createRound } from "@/api/round";
+import { getUsers, createUser } from "@/api/user";
 import AdminLeaderboard from "@/components/adminLeaderboard";
+import StatusMessage from "@/components/statusMessage";
 import MatchesTable from "@/components/matchesTable";
 import SearchBar from "@/components/searchBar";
-import StatusMessage from "@/components/statusMessage";
-
 import "@/styles/app.css";
 import "@/styles/admin.css";
 
 const Admin = () => {
   const [createUserInputValue, setCreateUserInputValue] = useState("");
-  // const [tableCountValue, setTableCountValue] = useState(0);
 
   const [initialUsers, setInitialUsers] = useState([]);
   const [searchedUsers, setSearchedUsers] = useState([]);
@@ -20,17 +18,38 @@ const Admin = () => {
   const [initialRounds, setInitialRounds] = useState([]);
   const [searchedRounds, setSearchedRounds] = useState([]);
 
-  const getUsers = GetUsers();
-  const createUser = CreateUser();
-  const getRounds = GetRounds();
-  const createRound = CreateRound();
-  // const getTableCount = GetTableCount();
-  // const setTableCount = SetTableCount();
+  const getUsersQuery = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
+  const createUserMutation = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      getUsersQuery.refetch().then((res) => {
+        setSearchedUsers(res.data);
+      });
+    },
+  });
+
+  const getRoundsQuery = useQuery({
+    queryKey: ["rounds"],
+    queryFn: getRounds,
+  });
+
+  const createRoundMutation = useMutation({
+    mutationFn: createRound,
+    onSuccess: () => {
+      getRoundsQuery.refetch().then((res) => {
+        setSearchedRounds(res.data);
+      });
+    },
+  });
 
   useEffect(() => {
-    if (getUsers.isFetched) setInitialUsers(getUsers.data);
-    if (getRounds.isFetched) setInitialRounds(getRounds.data);
-  }, [getUsers, getRounds]);
+    if (getUsersQuery.isFetched) setInitialUsers(getUsersQuery.data);
+    if (getRoundsQuery.isFetched) setInitialRounds(getRoundsQuery.data);
+  }, [getUsersQuery, getRoundsQuery]);
 
   useEffect(() => {
     setSearchedUsers(initialUsers);
@@ -40,50 +59,21 @@ const Admin = () => {
     setSearchedRounds(initialRounds);
   }, [initialRounds]);
 
-  // useEffect(() => {
-  //   if (getTableCount.isFetched) setTableCountValue(getTableCount.data);
-  // }, [getTableCount])
-
   const handleChange = (event) => setCreateUserInputValue(event.target.value);
   const handleKeyDown = (event) => event.key === "Enter" && submit();
 
   const submit = () => {
     if (createUserInputValue.length === 0) return;
-    createUser.mutate(
-      {
-        name: createUserInputValue,
-      },
+    createUserMutation.mutate(
+      { name: createUserInputValue },
       {
         onSuccess: () => {
-          getUsers.refetch();
+          getUsersQuery.refetch();
         },
       },
     );
     setCreateUserInputValue("");
   };
-
-  const generateRound = () => {
-    createRound.mutate(
-      {},
-      {
-        onSuccess: () => {
-          getRounds.refetch().then((res) => {
-            setSearchedRounds(res.data);
-          });
-        },
-      },
-    );
-  };
-
-  // const handleChangeTableCount = event => {
-  //   setTableCountValue(event.target.value);
-  // }
-
-  // const handleKeyDownTableCount = event => {
-  //   event.key === "Enter" && setTableCount.mutate({
-  //     tableCount: event.target.value
-  //   });
-  // };
 
   return (
     <>
@@ -109,55 +99,49 @@ const Admin = () => {
             onClick={() => submit()}
           />
         </div>
-        {/* <div className="numberOfTablesBox gradient-border">
-          <h3>Antall bord:</h3>
-          <input type="number" min={0} placeholder={tableCountValue.toString()} onChange={handleChangeTableCount} onKeyDown={handleKeyDownTableCount} />
-        </div> */}
         <div className="generateRoundBox gradient-border">
           <input
             type="button"
             value="Generer ny runde"
-            onClick={generateRound}
+            onClick={() => createRoundMutation.mutate()}
           />
         </div>
       </div>
       <div className="adminContent">
         <div className="adminLeaderboard">
-          {getUsers.isLoading ||
-          getUsers.isError ||
+          {getUsersQuery.isLoading ||
+          getUsersQuery.isError ||
           searchedUsers.length == 0 ? (
-            <StatusMessage query={getUsers} />
+            <StatusMessage query={getUsersQuery} />
           ) : (
             <AdminLeaderboard
               data={searchedUsers}
               initialData={initialUsers}
-              getUsersQuery={getUsers}
               hasStarted={initialRounds.length !== 0}
             />
           )}
         </div>
         <div className="verticalLine" />
         <div className="adminMatches">
-          {getRounds.isLoading ||
-          getRounds.isFetching ||
-          getRounds.isError ||
+          {getRoundsQuery.isLoading ||
+          getRoundsQuery.isFetching ||
+          getRoundsQuery.isError ||
           searchedRounds.length <= 0 ? (
-            <StatusMessage query={getRounds} />
+            <StatusMessage query={getRoundsQuery} />
           ) : (
             <MatchesTable
               data={searchedRounds[searchedRounds.length - 1]}
               roundNr="NÅ"
               isAdmin={true}
-              getUsers={getUsers}
             />
           )}
           <div className="historyMatches">
             <h2 className="historyTitle">Historikk</h2>
-            {getRounds.isLoading ||
-            getRounds.isFetching ||
-            getRounds.isError ||
+            {getRoundsQuery.isLoading ||
+            getRoundsQuery.isFetching ||
+            getRoundsQuery.isError ||
             searchedRounds.length <= 0 ? (
-              <StatusMessage query={getRounds} />
+              <StatusMessage query={getRoundsQuery} />
             ) : (
               initialRounds
                 .slice(0, -1)
@@ -167,7 +151,6 @@ const Admin = () => {
                     data={searchedRounds.slice(0, -1)[round.order - 1]}
                     roundNr={round.order}
                     isAdmin={true}
-                    getUsers={getUsers}
                     key={round.order}
                   />
                 ))
@@ -175,7 +158,6 @@ const Admin = () => {
           </div>
         </div>
       </div>
-      {/* <Laser /> */}
       <div className="fade" />
     </>
   );

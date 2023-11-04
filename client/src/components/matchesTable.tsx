@@ -1,28 +1,26 @@
-import { Match, MatchesTableProps, result } from "@/types";
-import { UpdateResult } from "@/api/match";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateResult } from "@/api/match";
 import StatusMessage from "./statusMessage";
+import { Match, Round, result } from "@/types";
 
-const MatchesTable = ({
-  data,
-  roundNr,
-  isAdmin = false,
-  getUsers,
-}: MatchesTableProps) => {
-  const updateResult = UpdateResult();
+interface Props {
+  data: Round;
+  roundNr: number | string;
+  isAdmin?: boolean;
+}
 
-  const setResult = (event, match: Match) => {
-    updateResult.mutate(
-      {
-        match,
-        result: { result: event.target.value },
-      },
-      {
-        onSuccess: () => {
-          getUsers.refetch();
-        },
-      },
-    );
-  };
+const MatchesTable = ({ data, roundNr, isAdmin = false }: Props) => {
+  const queryClient = useQueryClient();
+  const updateResultMutation = useMutation({
+    mutationFn: updateResult,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
+
+  const setResult = (event, match: Match) =>
+    updateResultMutation.mutate({
+      match,
+      result: { result: event.target.value },
+    });
 
   return (
     <>

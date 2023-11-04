@@ -1,23 +1,25 @@
 import { useEffect, useState } from "preact/hooks";
-import { GetUsers } from "@/api/user";
+import { useQuery } from "@tanstack/react-query";
+import { getUsers } from "@/api/user";
+import StatusMessage from "@/components/statusMessage";
 import Leaderboard from "@/components/leaderboard";
 import SearchBar from "@/components/searchBar";
-
 import "@/styles/app.css";
-import StatusMessage from "@/components/statusMessage";
-import Laser from "@/components/laser";
 
 const Home = () => {
   const [initialData, setInitialData] = useState([]);
   const [searchedData, setSearchedData] = useState([]);
 
-  const getUsers = GetUsers();
+  const getUsersQuery = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
 
   useEffect(() => {
-    if (getUsers.isFetched) {
-      setInitialData(getUsers.data);
+    if (getUsersQuery.isFetched) {
+      setInitialData(getUsersQuery.data);
     }
-  }, [getUsers]);
+  }, [getUsersQuery]);
 
   useEffect(() => {
     setSearchedData(initialData);
@@ -30,8 +32,8 @@ const Home = () => {
         <h1>AbaSjakk</h1>
       </div>
       <SearchBar type="USER" users={initialData} setUsers={setSearchedData} />
-      {getUsers.isLoading || getUsers.isError ? (
-        <StatusMessage query={getUsers} />
+      {getUsersQuery.isLoading || getUsersQuery.isError ? (
+        <StatusMessage query={getUsersQuery} />
       ) : (
         <Leaderboard data={searchedData} initialData={initialData} />
       )}
