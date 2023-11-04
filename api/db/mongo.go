@@ -32,6 +32,20 @@ func GetCollection(collection string) *mongo.Collection {
 	return mongoClient.Database("abasjakk").Collection(collection)
 }
 
+func Find[T interface{}](collection string, filter interface{}) []T {
+	cursor, err := GetCollection(collection).Find(context.Background(), filter)
+	if err != nil {
+		panic(err)
+	}
+
+	var results []T
+	if err = cursor.All(context.Background(), &results); err != nil {
+		panic(err)
+	}
+
+	return results
+}
+
 func FindById[T interface{}](collection string, id primitive.ObjectID) (T, error) {
 	filter := bson.M{"_id": id}
 
@@ -49,17 +63,7 @@ func FindOne[T interface{}](collection string, filter interface{}) (T, error) {
 }
 
 func FindAll[T interface{}](collection string) []T {
-	cursor, err := GetCollection(collection).Find(context.Background(), bson.D{})
-	if err != nil {
-		panic(err)
-	}
-
-	var results []T
-	if err = cursor.All(context.Background(), &results); err != nil {
-		panic(err)
-	}
-
-	return results
+	return Find[T](collection, bson.D{})
 }
 
 func InsertOne[T interface{}](collection string, document T) primitive.ObjectID {

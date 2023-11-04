@@ -5,13 +5,20 @@ import (
 
 	"github.com/abakus-ntnu/abasjakk/api/db"
 	"github.com/abakus-ntnu/abasjakk/api/models"
+	"github.com/abakus-ntnu/abasjakk/api/utils"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func HandleGetMatches(c *gin.Context) {
 	matches := db.FindAll[models.Match]("match")
-	c.IndentedJSON(http.StatusOK, matches)
+
+	populatedMatches := make([]models.PopulatedMatch, len(matches))
+	for i := 0; i < len(matches); i++ {
+		populatedMatches[i] = utils.PopulateMatch(matches[i])
+	}
+
+	c.JSON(http.StatusOK, populatedMatches)
 }
 
 func HandleGetMatch(c *gin.Context) {
@@ -29,7 +36,9 @@ func HandleGetMatch(c *gin.Context) {
 		return
 	}
 
-	c.IndentedJSON(http.StatusCreated, match)
+	populatedMatch := utils.PopulateMatch(match)
+
+	c.JSON(http.StatusCreated, populatedMatch)
 }
 
 type MatchUpdateRequest struct {
