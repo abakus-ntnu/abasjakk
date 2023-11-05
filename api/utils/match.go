@@ -7,17 +7,20 @@ import (
 )
 
 func CreateMatch(whiteUser primitive.ObjectID, blackUser primitive.ObjectID, table int) models.Match {
-    result := models.InProgress
-    if whiteUser == blackUser { // Walkover
-		result = models.BlackWinner
-    }
-	return models.Match{
+	match := models.Match{
 		Id:        primitive.NewObjectID(),
 		WhiteUser: whiteUser,
 		BlackUser: blackUser,
-		Result:    result,
+		Result:    models.InProgress,
 		Table:     table,
 	}
+
+	if whiteUser == blackUser { // Walkover
+		UpdateScores(match, models.BlackWinner)
+		match.Result = models.BlackWinner
+	}
+
+	return match
 }
 
 func PopulateMatch(match models.Match) models.PopulatedMatch {
