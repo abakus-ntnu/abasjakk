@@ -5,7 +5,7 @@ import { resolve } from "path";
 export default ({ mode }) =>
   defineConfig({
     plugins: [preact()],
-    server: { port: 3000 },
+    server: { host: true, port: 3000 },
     define: {
       "process.env": loadEnv(mode, process.cwd(), ""),
     },
