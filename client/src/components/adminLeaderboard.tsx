@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUser, softDeleteUser, updateUser } from "@/api/user";
+import { deleteUser, updateUser } from "@/api/user";
 import { User } from "@/types";
 import "@/styles/leaderboard.css";
 
@@ -25,10 +25,6 @@ const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
     mutationFn: deleteUser,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
-  const softDeleteUserMutation = useMutation({
-    mutationFn: softDeleteUser,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
-  });
   const updateUserMutation = useMutation({
     mutationFn: updateUser,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
@@ -43,7 +39,7 @@ const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
     if (changeName) {
       user.name = event.target.value;
     } else {
-      user.score = event.target.value;
+      user.score = parseInt(event.target.value, 10);
     }
     setUsers(arr);
   };
@@ -95,7 +91,7 @@ const AdminLeaderboard = ({ data, initialData, hasStarted }: Props) => {
                 className="x"
                 onClick={() =>
                   hasStarted
-                    ? softDeleteUserMutation.mutate(findUserById(user._id))
+                    ? updateUserMutation.mutate({...findUserById(user._id), isDeleted: true})
                     : deleteUserMutation.mutate(findUserById(user._id))
                 }
               />

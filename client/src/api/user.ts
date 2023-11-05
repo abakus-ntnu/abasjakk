@@ -28,8 +28,3 @@ export const deleteUser = (user: User): Promise<void> =>
   ApiClient.delete(`/user/${user._id}`)
     .then((res) => console.log(res.status, "user deleted"))
     .catch((err) => err);
-
-export const softDeleteUser = (user: User): Promise<void> =>
-  ApiClient.put(`/user/${user._id}/softDelete`)
-    .then((res) => console.log(res.status, "user soft deleted"))
-    .catch((err) => err);

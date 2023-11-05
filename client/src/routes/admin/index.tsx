@@ -117,7 +117,7 @@ const Admin = () => {
         <div className="adminLeaderboard">
           {getUsersQuery.isLoading ||
           getUsersQuery.isError ||
-          searchedUsers.length == 0 ? (
+          searchedUsers?.length === 0 ? (
             <StatusMessage query={getUsersQuery} />
           ) : (
             <AdminLeaderboard
