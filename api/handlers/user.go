@@ -6,6 +6,7 @@ import (
 	"github.com/abakus-ntnu/abasjakk/api/db"
 	"github.com/abakus-ntnu/abasjakk/api/models"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -95,6 +96,16 @@ func HandleUpdateUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "user updated"})
+}
+
+func HandleDeleteUsers(c *gin.Context) {
+	err := db.DeleteMany("user", bson.D{})
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "users deleted"})
 }
 
 func HandleDeleteUser(c *gin.Context) {

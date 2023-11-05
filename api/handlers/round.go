@@ -60,6 +60,21 @@ func HandleCreateRound(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "round created"})
 }
 
+func HandleDeleteRounds(c *gin.Context) {
+	filter := bson.D{}
+	err := db.DeleteMany("match", filter)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+		return
+	}
+	err = db.DeleteMany("round", filter)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"message": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "rounds deleted"})
+}
+
 func HandleDeleteRound(c *gin.Context) {
 	paramId := c.Param("id")
 

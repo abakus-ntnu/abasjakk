@@ -22,6 +22,7 @@ func main() {
 
 	router.GET("/user/", handlers.HandleGetUsers)
 	router.POST("/user/", handlers.HandleCreateUser)
+	router.DELETE("/user/", handlers.HandleDeleteUsers)
 	router.GET("/user/:id", handlers.HandleGetUser)
 	router.PUT("/user/:id", handlers.HandleUpdateUser)
 	router.DELETE("/user/:id", handlers.HandleDeleteUser)
@@ -30,6 +31,7 @@ func main() {
 	router.PUT("/match/:id", handlers.HandleUpdateMatch)
 	router.GET("/round/", handlers.HandleGetRounds)
 	router.POST("/round/", handlers.HandleCreateRound)
+	router.DELETE("/round/", handlers.HandleDeleteRounds)
 	router.GET("/round/:id", handlers.HandleGetRound)
 	router.DELETE("/round/:id", handlers.HandleDeleteRound)
 	router.GET("/login", handlers.HandleLogin)

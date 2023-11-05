@@ -84,6 +84,11 @@ func UpdateById[T interface{}](collection string, id primitive.ObjectID, documen
 	return err
 }
 
+func DeleteMany(collection string, filter interface{}) error {
+	_, err := GetCollection(collection).DeleteMany(context.Background(), filter)
+	return err
+}
+
 func DeleteById(collection string, id primitive.ObjectID) error {
 	filter := bson.M{"_id": id}
 
