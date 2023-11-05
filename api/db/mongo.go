@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -12,7 +13,10 @@ import (
 var mongoClient *mongo.Client
 
 func StartMongoDB() {
-	uri := "mongodb://localhost:27017"
+	uri := os.Getenv("MONGO_URL")
+	if len(uri) == 0 {
+		uri = "mongodb://localhost:27017"
+	}
 
 	var err error
 	mongoClient, err = mongo.Connect(context.Background(), options.Client().ApplyURI(uri))
